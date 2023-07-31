@@ -49,6 +49,8 @@ public class Validator<Model> {
     }
 }
 
+// MARK: - Custom validator extension
+
 extension Validator {
     /**
     Adds a validation rule to the Validator for the specified condition.
@@ -76,6 +78,3 @@ extension Validator {
         return self
     }
 }
-
-// Add more validate() methods for other property types like String, Int, etc.
-
