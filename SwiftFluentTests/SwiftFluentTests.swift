@@ -267,5 +267,31 @@ final class SwiftFluentTests: XCTestCase {
         let result = sut.validate(equalInt)
         XCTAssertTrue(result.isValid)
     }
+
+    func testEqualForStringIsValidTrue() throws {
+        let equalString = "equal string"
+
+        let notEqualError = "Expected to be equal to \(equalString)"
+
+        let sut = Validator<String>()
+
+        sut.equal(to: "equal string", errorMessage: notEqualError)
+
+        let result = sut.validate(equalString)
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testEqualForOptionalIsValidTrue() throws {
+        let equalOptional: Bool? = nil
+
+        let notEqualError = "Expected to be equal to nil, whereas result is not nil"
+
+        let sut = Validator<Bool?>()
+
+        sut.equal(to: nil, errorMessage: notEqualError)
+
+        let result = sut.validate(equalOptional)
+        XCTAssertTrue(result.isValid)
+    }
 }
 
