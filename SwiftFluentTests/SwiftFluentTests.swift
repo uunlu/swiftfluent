@@ -113,7 +113,7 @@ final class SwiftFluentTests: XCTestCase {
     }
 
     func testNotEmptyIsValidFalse() throws {
-        let numberOnlyString = "    "
+        let emptyOrWhiteSpaceString = "    "
 
         let notEmptyError = "It is an empty string."
 
@@ -121,7 +121,46 @@ final class SwiftFluentTests: XCTestCase {
 
         sut.notEmpty(errorMessage: notEmptyError)
 
-        let result = sut.validate(numberOnlyString)
+        let result = sut.validate(emptyOrWhiteSpaceString)
+        XCTAssertFalse(result.isValid)
+    }
+
+    func testNotEmptyIsValidTrue() throws {
+        let notEmptyString = "not empty string"
+
+        let notEmptyError = "It is an empty string."
+
+        let sut = Validator<String>()
+
+        sut.notEmpty(errorMessage: notEmptyError)
+
+        let result = sut.validate(notEmptyString)
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testNotEqualIsValidTrue() throws {
+        let notEqualString = "not equal to this string"
+
+        let notEqualError = "Equal to string whereas expected to be not equal."
+
+        let sut = Validator<String>()
+
+        sut.notEqual(to: "some string", errorMessage: notEqualError)
+
+        let result = sut.validate(notEqualString)
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testNotEqualIsValidFalse() throws {
+        let notEqualString = "not equal to this string"
+
+        let notEqualError = "Equal to string whereas expected to be not equal."
+
+        let sut = Validator<String>()
+
+        sut.notEqual(to: notEqualString, errorMessage: notEqualError)
+
+        let result = sut.validate(notEqualString)
         XCTAssertFalse(result.isValid)
     }
 }

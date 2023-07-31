@@ -123,6 +123,30 @@ extension Validator where Model == String{
         addRule(rule)
         return self
     }
+
+    /**
+     Adds a validation rule to the Validator to check if the string is not equal to a specific value.
+
+     Use this method to add a validation rule that ensures the input string is not equal to the specified `string` value.
+
+     - Parameter string: The string value to compare against.
+     - Parameter errorMessage: The error message to display if the validation fails.
+     - Returns: The Validator instance with the new validation rule added.
+
+     Example usage:
+     The above example creates a `Validator` instance for validating a `String` input. It adds a validation rule using the `notEqual(to:)` method, which checks if the input string is not equal to the provided `string` value. If the input matches the specified value, the validation fails, and the provided error message will be displayed.
+
+     - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
+     */
+    @discardableResult
+    public func notEqual(to string: String, errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { !$0.elementsEqual(string) }
+        )
+        addRule(rule)
+        return self
+    }
 }
 
 // MARK: - String extensions
