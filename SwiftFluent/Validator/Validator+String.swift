@@ -20,6 +20,31 @@ extension Validator where Model == String{
         return self
     }
 
+    /**
+     Adds a credit card validation rule to the Validator.
+
+     Use this method to add a credit card validation rule to the Validator. The `creditCard` function checks if the credit card number, represented by the input `Model`, is valid according to the Luhn algorithm using the `CreditCardValidator.isValid(_:)` function.
+
+     - Parameter errorMessage: The error message to display if the credit card validation fails.
+     - Returns: The Validator instance with the new credit card validation rule added.
+
+     Example usage:
+     ```swift
+     let validator = Validator<String>()
+     .creditCard(errorMessage: "Invalid credit card number.")
+     ```
+     - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
+     */
+    @discardableResult
+    public func creditCard(errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { CreditCardValidator.isValid($0) }
+        )
+        addRule(rule)
+        return self
+    }
+
     @discardableResult
     public func number(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(

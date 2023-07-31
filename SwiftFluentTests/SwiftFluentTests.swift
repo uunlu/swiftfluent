@@ -471,5 +471,32 @@ final class SwiftFluentTests: XCTestCase {
         XCTAssertEqual(sut.validationErrors.first, greaterThanOrEqualToError)
     }
 
+    func testCreditCardIsValidTrue() throws {
+        let creditCard = "374245455400126"
+        let invalidCreditCardError = "Not a valid credit card"
+
+        let sut = Validator<String>()
+
+        sut.creditCard(errorMessage: invalidCreditCardError)
+
+        let result = sut.validate(creditCard)
+
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testCreditCardIsValidFalse() throws {
+        let creditCard = ""
+        let invalidCreditCardError = "Not a valid credit card"
+
+        let sut = Validator<String>()
+
+        sut.creditCard(errorMessage: invalidCreditCardError)
+
+        let result = sut.validate(creditCard)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, invalidCreditCardError)
+    }
+
 }
 
