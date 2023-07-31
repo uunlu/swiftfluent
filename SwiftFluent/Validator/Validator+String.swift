@@ -77,6 +77,16 @@ extension Validator where Model == String{
         addRule(rule)
         return self
     }
+
+    @discardableResult
+    public func length(_ min: Int, _ max: Int, errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { $0.count >= min && $0.count < max }
+        )
+        addRule(rule)
+        return self
+    }
 }
 
 // MARK: - String extensions

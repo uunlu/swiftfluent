@@ -293,5 +293,21 @@ final class SwiftFluentTests: XCTestCase {
         let result = sut.validate(equalOptional)
         XCTAssertTrue(result.isValid)
     }
+
+    func testLengthRangeIsValidFalse() throws {
+        let equalOptional: String = "some string"
+        let minCharacter = 2
+        let maxCharacter = 5
+        let notEqualError = "Expected to be between \(minCharacter) to \(maxCharacter) "
+
+        let sut = Validator<String>()
+
+        sut.length(minCharacter, maxCharacter, errorMessage: notEqualError)
+
+        let result = sut.validate(equalOptional)
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, notEqualError)
+    }
+
 }
 
