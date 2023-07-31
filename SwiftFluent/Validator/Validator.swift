@@ -89,6 +89,16 @@ extension Validator where Model == String{
         addRule(rule)
         return self
     }
+
+    @discardableResult
+    public func number(errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { $0.containsOnlyNumbers() }
+        )
+        addRule(rule)
+        return self
+    }
 }
 
 extension String {
@@ -98,5 +108,10 @@ extension String {
 
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: self)
+    }
+
+    func containsOnlyNumbers() -> Bool {
+        let numbersSet = CharacterSet.decimalDigits
+        return self.rangeOfCharacter(from: numbersSet.inverted) == nil
     }
 }

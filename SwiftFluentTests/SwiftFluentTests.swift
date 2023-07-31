@@ -84,5 +84,19 @@ final class SwiftFluentTests: XCTestCase {
         XCTAssertEqual(sut.validationErrors.first, nil)
     }
 
+    func testNumberOnlyNotValid() throws {
+        let numberOnlyString = "1234u"
+
+        let invalidNumberError = "Not a valid number"
+
+        let sut = Validator<String>()
+
+        sut
+            .email(errorMessage: invalidNumberError)
+
+        let result = sut.validate(numberOnlyString)
+        XCTAssertFalse(result.isValid)
+    }
+
 }
 
