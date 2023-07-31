@@ -10,6 +10,14 @@ import Foundation
 // MARK: - Validator `String` extensions
 
 extension Validator where Model == String{
+    /**
+     Adds an email validation rule to the Validator.
+
+     Use this method to add an email validation rule to the Validator. The `email` function checks if the input `Model` contains a valid email address by invoking the `isValidEmail()` function on it.
+
+     - Parameter errorMessage: The error message to display if the email validation fails.
+     - Returns: The Validator instance with the new email validation rule added.
+     */
     @discardableResult
     public func email(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
