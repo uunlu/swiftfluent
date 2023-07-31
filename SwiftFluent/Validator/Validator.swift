@@ -77,19 +77,6 @@ extension Validator {
     }
 }
 
-extension Validator where Model: Equatable {
-    @discardableResult
-    public func notEqual(to value: Model, errorMessage: String) -> Validator<Model> {
-        let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
-            isValid: { $0 != value }
-        )
-        addRule(rule)
-        return self
-    }
-}
-
-
 // Add more validate() methods for other property types like String, Int, etc.
 
 // MARK: - Validator `String` extensions

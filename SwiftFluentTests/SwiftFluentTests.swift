@@ -241,5 +241,31 @@ final class SwiftFluentTests: XCTestCase {
         let result = sut.validate(notNilString)
         XCTAssertTrue(result.isValid)
     }
+
+    func testEqualIntIsValidFalse() throws {
+        let equalInt = 10
+
+        let notEqualError = "Equal to string whereas expected to be not equal."
+
+        let sut = Validator<Int>()
+
+        sut.equal(to: 0, errorMessage: notEqualError)
+
+        let result = sut.validate(equalInt)
+        XCTAssertFalse(result.isValid)
+    }
+
+    func testEqualIntIsValidTrue() throws {
+        let equalInt = 10
+
+        let notEqualError = "Equal to string whereas expected to be not equal."
+
+        let sut = Validator<Int>()
+
+        sut.equal(to: 10, errorMessage: notEqualError)
+
+        let result = sut.validate(equalInt)
+        XCTAssertTrue(result.isValid)
+    }
 }
 
