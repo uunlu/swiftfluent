@@ -417,5 +417,32 @@ final class SwiftFluentTests: XCTestCase {
         XCTAssertEqual(sut.validationErrors.first, lessThanOrEqualToError)
     }
 
+    func testGreaterThanIsValidTrue() throws {
+        let value: Int =  10
+        let greaterThan = 9
+        let greaterThanError = "Expected to be greater than \(greaterThan)"
+
+        let sut = Validator<Int>()
+
+        sut.greaterThan(greaterThan, errorMessage: greaterThanError)
+
+        let result = sut.validate(value)
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testGreaterThanIsValidFalse() throws {
+        let value: Int =  10
+        let greaterThan = 11
+        let greaterThanError = "Expected to be greater than \(greaterThan)"
+
+        let sut = Validator<Int>()
+
+        sut.greaterThan(greaterThan, errorMessage: greaterThanError)
+
+        let result = sut.validate(value)
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, greaterThanError)
+    }
+
 }
 
