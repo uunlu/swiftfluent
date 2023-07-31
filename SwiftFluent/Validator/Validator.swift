@@ -99,7 +99,33 @@ extension Validator where Model == String{
         addRule(rule)
         return self
     }
+
+    /**
+     Adds a validation rule to the Validator to check if the string is not empty or contains only white space.
+
+     Use this method to add a validation rule that ensures the input string is not empty and does not consist of only white space characters (e.g., spaces, tabs, newlines).
+
+     - Parameter errorMessage: The error message to display if the validation fails.
+     - Returns: The Validator instance with the new validation rule added.
+
+     Example usage:
+
+     The above example creates a `Validator` instance for validating a `String` input. It adds a validation rule using the `notEmpty` method, which checks if the input string is not empty and contains at least one non-white space character. If the input is empty or consists of only white space, the validation fails, and the provided error message will be displayed.
+
+     - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
+     */
+    @discardableResult
+    public func notEmpty(errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { $0.isNotEmpty() }
+        )
+        addRule(rule)
+        return self
+    }
 }
+
+// MARK: - String extensions
 
 fileprivate extension String {
     func isValidEmail() -> Bool {
@@ -113,5 +139,11 @@ fileprivate extension String {
     func containsOnlyNumbers() -> Bool {
         let numbersSet = CharacterSet.decimalDigits
         return self.rangeOfCharacter(from: numbersSet.inverted) == nil
+    }
+}
+
+fileprivate extension String {
+    func isNotEmpty() -> Bool {
+        self.isEmpty == false && self.trimmingCharacters(in: .whitespaces).isEmpty == false
     }
 }

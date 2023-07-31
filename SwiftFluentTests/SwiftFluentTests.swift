@@ -92,7 +92,7 @@ final class SwiftFluentTests: XCTestCase {
         let sut = Validator<String>()
 
         sut
-            .email(errorMessage: invalidNumberError)
+            .number(errorMessage: invalidNumberError)
 
         let result = sut.validate(numberOnlyString)
         XCTAssertFalse(result.isValid)
@@ -107,6 +107,19 @@ final class SwiftFluentTests: XCTestCase {
 
         sut
             .email(errorMessage: invalidNumberError)
+
+        let result = sut.validate(numberOnlyString)
+        XCTAssertFalse(result.isValid)
+    }
+
+    func testNotEmptyIsValidFalse() throws {
+        let numberOnlyString = "    "
+
+        let notEmptyError = "It is an empty string."
+
+        let sut = Validator<String>()
+
+        sut.notEmpty(errorMessage: notEmptyError)
 
         let result = sut.validate(numberOnlyString)
         XCTAssertFalse(result.isValid)
