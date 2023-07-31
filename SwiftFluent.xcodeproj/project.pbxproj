@@ -11,6 +11,7 @@
 		60A949512A77CED0001D17A9 /* SwiftFluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A949462A77CED0001D17A9 /* SwiftFluent.framework */; };
 		60A949562A77CED0001D17A9 /* SwiftFluentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */; };
 		60A949572A77CED0001D17A9 /* SwiftFluent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60A949492A77CED0001D17A9 /* SwiftFluent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60A949622A77CF27001D17A9 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949612A77CF27001D17A9 /* Validator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SwiftFluent.docc; sourceTree = "<group>"; };
 		60A949502A77CED0001D17A9 /* SwiftFluentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFluentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFluentTests.swift; sourceTree = "<group>"; };
+		60A949612A77CF27001D17A9 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		60A949482A77CED0001D17A9 /* SwiftFluent */ = {
 			isa = PBXGroup;
 			children = (
+				60A949602A77CF0B001D17A9 /* Validator */,
 				60A949492A77CED0001D17A9 /* SwiftFluent.h */,
 				60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */,
 			);
@@ -83,6 +86,14 @@
 				60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */,
 			);
 			path = SwiftFluentTests;
+			sourceTree = "<group>";
+		};
+		60A949602A77CF0B001D17A9 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				60A949612A77CF27001D17A9 /* Validator.swift */,
+			);
+			path = Validator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
 				60A9494B2A77CED0001D17A9 /* SwiftFluent.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +288,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -335,6 +348,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macos";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -356,17 +370,20 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = Mobiquity.SwiftFluent;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -387,17 +404,20 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = Mobiquity.SwiftFluent;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -407,10 +427,12 @@
 		60A9495E2A77CED0001D17A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J22BS6HA8N;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Mobiquity.SwiftFluentTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -423,10 +445,12 @@
 		60A9495F2A77CED0001D17A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J22BS6HA8N;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Mobiquity.SwiftFluentTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
