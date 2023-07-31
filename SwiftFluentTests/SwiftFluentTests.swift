@@ -163,5 +163,57 @@ final class SwiftFluentTests: XCTestCase {
         let result = sut.validate(notEqualString)
         XCTAssertFalse(result.isValid)
     }
+
+    func testNotNullIsValidFalse() throws {
+        let notNilString: String? = nil
+
+        let notNilError = "Expected not nil but received nil instead"
+
+        let sut = Validator<String?>()
+
+        sut.notNil(errorMessage: notNilError)
+
+        let result = sut.validate(notNilString)
+        XCTAssertFalse(result.isValid)
+    }
+
+    func testNotNullIsValidTrue() throws {
+        let notNilString = "not nil to this string"
+
+        let notEqualError = "Expected not nil but received nil instead"
+
+        let sut = Validator<String?>()
+
+        sut.notNil(errorMessage: notEqualError)
+
+        let result = sut.validate(notNilString)
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testNotNullCheckForIntIsValidFalse() throws {
+        let notNilString: Int? = nil
+
+        let notEqualError = "Expected not nil but received nil instead"
+
+        let sut = Validator<Int?>()
+
+        sut.notNil(errorMessage: notEqualError)
+
+        let result = sut.validate(notNilString)
+        XCTAssertFalse(result.isValid)
+    }
+
+    func testNotNullCheckForIntIsValidTrue() throws {
+        let notNilString: Int? = 10
+
+        let notEqualError = "Expected not nil but received nil instead"
+
+        let sut = Validator<Int?>()
+
+        sut.notNil(errorMessage: notEqualError)
+
+        let result = sut.validate(notNilString)
+        XCTAssertTrue(result.isValid)
+    }
 }
 

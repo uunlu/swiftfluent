@@ -12,6 +12,7 @@
 		60A949562A77CED0001D17A9 /* SwiftFluentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */; };
 		60A949572A77CED0001D17A9 /* SwiftFluent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60A949492A77CED0001D17A9 /* SwiftFluent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60A949622A77CF27001D17A9 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949612A77CF27001D17A9 /* Validator.swift */; };
+		60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78042A78196A005D539A /* Validator+OptionalType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		60A949502A77CED0001D17A9 /* SwiftFluentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFluentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFluentTests.swift; sourceTree = "<group>"; };
 		60A949612A77CF27001D17A9 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		60DB78042A78196A005D539A /* Validator+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator+OptionalType.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				60A949612A77CF27001D17A9 /* Validator.swift */,
+				60DB78042A78196A005D539A /* Validator+OptionalType.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
+				60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */,
 				60A9494B2A77CED0001D17A9 /* SwiftFluent.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -76,8 +76,10 @@ extension Validator {
         return self
     }
 
-    // Add more validate() methods for other property types like String, Int, etc.
 }
+
+
+// Add more validate() methods for other property types like String, Int, etc.
 
 // MARK: - Validator `String` extensions
 
