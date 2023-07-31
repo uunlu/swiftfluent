@@ -78,6 +78,20 @@ extension Validator where Model == String{
         return self
     }
 
+    /**
+     Extends the Validator type with a method to perform length-based validation on the given model type.
+
+     - Parameters:
+     - min: The minimum allowable length of the model's value.
+     - max: The maximum allowable length of the model's value.
+     - errorMessage: The error message to display if the validation fails.
+
+     - Returns: An instance of the Validator with the new length-based validation rule added.
+
+     - Note: The `@discardableResult` attribute allows the user to ignore the return value of this method if they choose to do so.
+
+     - Remark: This method checks the length of the model's value against the specified `min` and `max` values (inclusive on the minimum end and exclusive on the maximum end). The validation will pass if the length of the model's value is greater than or equal to `min` and less than `max`.
+     */
     @discardableResult
     public func length(_ min: Int, _ max: Int, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
@@ -88,6 +102,19 @@ extension Validator where Model == String{
         return self
     }
 
+    /**
+     Extends the Validator type with a method to perform minimum length validation on the given model type.
+
+     - Parameters:
+     - min: The minimum allowable length of the model's value.
+     - errorMessage: The error message to display if the validation fails.
+
+     - Returns: An instance of the Validator with the new minimum length validation rule added.
+
+     - Note: The `@discardableResult` attribute allows the user to ignore the return value of this method if they choose to do so.
+
+     - Remark: This method checks the length of the model's value against the specified `min` value. The validation will pass if the length of the model's value is greater than or equal to `min`.
+     */
     @discardableResult
     public func minLength(_ min: Int, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
