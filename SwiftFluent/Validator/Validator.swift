@@ -26,6 +26,7 @@ public enum ValidationResult {
 
 public class Validator<Model> {
     private var validationRules: [ValidationRule<Model>] = []
+    private(set) public var validationErrors: [String] = []
 
     public init() { }
 
@@ -41,6 +42,8 @@ public class Validator<Model> {
         let invalidErrors = validationRules
             .filter { !$0.isValid(model) }
             .map { $0.errorMessage }
+
+        validationErrors = invalidErrors
 
         return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors)
     }

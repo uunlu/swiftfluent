@@ -31,8 +31,25 @@ final class SwiftFluentTests: XCTestCase {
         sut
             .validate({ !$0.isEmpty}, errorMessage: "Should not be empty")
             .validate({ $0.count > 5 }, errorMessage: "Should be at least 6 characters")
-        
+
         let result = sut.validate(password)
         XCTAssertEqual(result.isValid, true, "Expected true but invalid password")
+    }
+
+    func testOnForInvalidValidation_ListErrors() throws {
+        let password = "myValidPassword"
+        let sut = Validator<String>()
+
+        let emptyInputError = "Should not be empty"
+        let minimumCharacterError = "Should be at least 6 characters"
+        sut
+            .validate({ !$0.isEmpty}, errorMessage: emptyInputError)
+            .validate({ $0.count > 25 }, errorMessage: minimumCharacterError)
+
+        let result = sut.validate(password)
+        XCTAssertEqual(result.isValid, false, "Expected true but invalid password")
+        XCTAssertEqual(sut.validationErrors.count, 1)
+        XCTAssertEqual(sut.validationErrors.first, minimumCharacterError)
+
     }
 }
