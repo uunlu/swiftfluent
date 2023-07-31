@@ -37,19 +37,36 @@ final class SwiftFluentTests: XCTestCase {
     }
 
     func testOnForInvalidValidation_ListErrors() throws {
-        let password = "myValidPassword"
+        let password = "foe"
         let sut = Validator<String>()
 
-        let emptyInputError = "Should not be empty"
-        let minimumCharacterError = "Should be at least 6 characters"
+        let emptyInputError = "Should not be empty."
+        let minimumCharacterError = "Should be at least 6 characters."
         sut
             .validate({ !$0.isEmpty}, errorMessage: emptyInputError)
-            .validate({ $0.count > 25 }, errorMessage: minimumCharacterError)
+            .validate({ $0.count > 5 }, errorMessage: minimumCharacterError)
 
         let result = sut.validate(password)
         XCTAssertEqual(result.isValid, false, "Expected true but invalid password")
         XCTAssertEqual(sut.validationErrors.count, 1)
         XCTAssertEqual(sut.validationErrors.first, minimumCharacterError)
-
     }
+
+    func testEmailFalseForInvalidEmail() throws {
+        let email = "ugur@"
+
+        let emailError = "Not a valid email"
+
+        let sut = Validator<String>()
+
+        sut
+            .email(errorMessage: emailError)
+
+        let result = sut.validate(email)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, emailError)
+    }
+
 }
+

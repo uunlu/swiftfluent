@@ -78,3 +78,25 @@ extension Validator {
 
     // Add more validate() methods for other property types like String, Int, etc.
 }
+
+extension Validator where Model == String{
+    @discardableResult
+    public func email(errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { $0.isValidEmail() }
+        )
+        addRule(rule)
+        return self
+    }
+}
+
+extension String {
+    func isValidEmail() -> Bool {
+        // Regular expression pattern to match email addresses
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: self)
+    }
+}
