@@ -312,7 +312,7 @@ final class SwiftFluentTests: XCTestCase {
     func testMinLengtIsValidFalse() throws {
         let equalOptional: String = "some string"
         let minCharacter = 20
-        let notEqualError = "Expected to be at least \(minCharacter)"
+        let notEqualError = "Expected to be at least \(minCharacter) characters"
 
         let sut = Validator<String>()
 
@@ -326,7 +326,7 @@ final class SwiftFluentTests: XCTestCase {
     func testMinLengtIsValidTrue() throws {
         let equalOptional: String = "some string"
         let minCharacter = 5
-        let notEqualError = "Expected to be at least \(minCharacter)"
+        let notEqualError = "Expected to be at least \(minCharacter) characters"
 
         let sut = Validator<String>()
 
@@ -334,6 +334,33 @@ final class SwiftFluentTests: XCTestCase {
 
         let result = sut.validate(equalOptional)
         XCTAssertTrue(result.isValid)
+    }
+
+    func testMaxLengtIsValidFalse() throws {
+        let equalOptional: String = "some string"
+        let maxCharacter = 20
+        let notEqualError = "Expected to be at most \(maxCharacter) characters"
+
+        let sut = Validator<String>()
+
+        sut.maxLength(maxCharacter, errorMessage: notEqualError)
+
+        let result = sut.validate(equalOptional)
+        XCTAssertTrue(result.isValid)
+    }
+
+    func testMaxLengtIsValidTrue() throws {
+        let equalOptional: String = "some string"
+        let minCharacter = 5
+        let notEqualError = "Expected to be at most \(minCharacter) characters"
+
+        let sut = Validator<String>()
+
+        sut.maxLength(minCharacter, errorMessage: notEqualError)
+
+        let result = sut.validate(equalOptional)
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, notEqualError)
     }
 
 }
