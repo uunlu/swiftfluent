@@ -309,5 +309,32 @@ final class SwiftFluentTests: XCTestCase {
         XCTAssertEqual(sut.validationErrors.first, notEqualError)
     }
 
+    func testMinLengtIsValidFalse() throws {
+        let equalOptional: String = "some string"
+        let minCharacter = 20
+        let notEqualError = "Expected to be at least \(minCharacter)"
+
+        let sut = Validator<String>()
+
+        sut.minLength(minCharacter, errorMessage: notEqualError)
+
+        let result = sut.validate(equalOptional)
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, notEqualError)
+    }
+
+    func testMinLengtIsValidTrue() throws {
+        let equalOptional: String = "some string"
+        let minCharacter = 5
+        let notEqualError = "Expected to be at least \(minCharacter)"
+
+        let sut = Validator<String>()
+
+        sut.minLength(minCharacter, errorMessage: notEqualError)
+
+        let result = sut.validate(equalOptional)
+        XCTAssertTrue(result.isValid)
+    }
+
 }
 
