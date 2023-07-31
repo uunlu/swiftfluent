@@ -68,5 +68,21 @@ final class SwiftFluentTests: XCTestCase {
         XCTAssertEqual(sut.validationErrors.first, emailError)
     }
 
+    func testForvalidEmailIsValid() throws {
+        let email = "ugur@gmail.com"
+
+        let emailError = "Not a valid email"
+
+        let sut = Validator<String>()
+
+        sut
+            .email(errorMessage: emailError)
+
+        let result = sut.validate(email)
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(sut.validationErrors.first, nil)
+    }
+
 }
 
