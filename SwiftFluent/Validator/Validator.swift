@@ -75,7 +75,18 @@ extension Validator {
         addRule(rule)
         return self
     }
+}
 
+extension Validator where Model: Equatable {
+    @discardableResult
+    public func notEqual(to value: Model, errorMessage: String) -> Validator<Model> {
+        let rule = ValidationRule<Model>(
+            errorMessage: errorMessage,
+            isValid: { $0 != value }
+        )
+        addRule(rule)
+        return self
+    }
 }
 
 
@@ -143,10 +154,10 @@ extension Validator where Model == String{
      - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
      */
     @discardableResult
-    public func notEqual(to string: String, errorMessage: String) -> Validator<Model> {
+    public func notEqual(to value: Model, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
             errorMessage: errorMessage,
-            isValid: { !$0.elementsEqual(string) }
+            isValid: { !$0.elementsEqual(value) }
         )
         addRule(rule)
         return self
