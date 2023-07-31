@@ -79,6 +79,8 @@ extension Validator {
     // Add more validate() methods for other property types like String, Int, etc.
 }
 
+// MARK: - Validator `String` extensions
+
 extension Validator where Model == String{
     @discardableResult
     public func email(errorMessage: String) -> Validator<Model> {
