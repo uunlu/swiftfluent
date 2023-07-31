@@ -101,7 +101,7 @@ extension Validator where Model == String{
     }
 }
 
-extension String {
+fileprivate extension String {
     func isValidEmail() -> Bool {
         // Regular expression pattern to match email addresses
         let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
