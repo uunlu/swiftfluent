@@ -15,4 +15,12 @@ final class SwiftFluentTests: XCTestCase {
 
         XCTAssertTrue(result.isValid)
     }
+
+    func testOnStringEmpty_IsNotValid() throws {
+        let sut = Validator<String>()
+        sut
+            .validate({ !$0.isEmpty}, errorMessage: "Should not be empty")
+        let result = sut.validate("")
+        XCTAssertFalse(result.isValid)
+    }
 }
