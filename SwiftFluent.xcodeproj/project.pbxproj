@@ -14,6 +14,7 @@
 		60A949622A77CF27001D17A9 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949612A77CF27001D17A9 /* Validator.swift */; };
 		60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78042A78196A005D539A /* Validator+OptionalType.swift */; };
 		60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78062A781D80005D539A /* Validator+Equatable.swift */; };
+		60DB78092A78303B005D539A /* Validator+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78082A78303A005D539A /* Validator+String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		60A949612A77CF27001D17A9 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		60DB78042A78196A005D539A /* Validator+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator+OptionalType.swift"; sourceTree = "<group>"; };
 		60DB78062A781D80005D539A /* Validator+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator+Equatable.swift"; sourceTree = "<group>"; };
+		60DB78082A78303A005D539A /* Validator+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				60A949612A77CF27001D17A9 /* Validator.swift */,
 				60DB78062A781D80005D539A /* Validator+Equatable.swift */,
 				60DB78042A78196A005D539A /* Validator+OptionalType.swift */,
+				60DB78082A78303A005D539A /* Validator+String.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DB78092A78303B005D539A /* Validator+String.swift in Sources */,
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
 				60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */,
 				60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */,
