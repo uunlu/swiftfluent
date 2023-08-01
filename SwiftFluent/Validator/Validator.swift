@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ValidationRule<Model> {
-    public let errorMessage: String
+    public var errorMessage: String
     public let isValid: (Model) -> Bool
 }
 
@@ -77,4 +77,45 @@ extension Validator {
         addRule(rule)
         return self
     }
+}
+
+
+extension Validator {
+    @discardableResult
+    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>, length range: ClosedRange<Int>, errorMessage: String) -> Validator<Model> where Value == String {
+        var rule = ValidationRule<Model>(errorMessage: "") { model in
+            let value = model[keyPath: keyPath]
+            return range.contains(value.count)
+        }
+        rule.errorMessage = errorMessage
+        addRule(rule)
+        return self
+    }
+
+    @discardableResult
+    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>, maxLength length: Int, errorMessage: String = "") -> Validator<Model> where Value == String {
+        var message = errorMessage
+
+        var rule = ValidationRule<Model>(errorMessage: "") { model in
+            let value = model[keyPath: keyPath]
+            if message.isEmpty {
+                message = "The length of ‘\(Value.self)’ must be \(length) characters or fewer. You entered \(value.count) characters."
+            }
+            return Validator<Value>().maxLength(length, errorMessage: errorMessage).validate(value).isValid
+        }
+        rule.errorMessage = errorMessage
+        addRule(rule)
+        return self
+    }
+
+    @discardableResult
+    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>, maxLength length: Int, errorMessage: String, isValid: @escaping (Model) -> Bool) -> Validator<Model> where Value == String {
+        var rule = ValidationRule<Model>(errorMessage: errorMessage) { model in
+            return isValid(model)
+        }
+        rule.errorMessage = errorMessage
+        addRule(rule)
+        return self
+    }
+
 }
