@@ -30,16 +30,31 @@ public extension RuleForBuilder {
         return self
     }
 
-    func email() -> RuleForBuilder<Model, Value> where Value == String {
-        let rule = ValidationRule<Model> { model in
+    class ErrorMessage {
+        var message: String
+
+        init(_ message: String) {
+            self.message = message
+        }
+    }
+
+    func email(errorMessage: String = "") -> RuleForBuilder<Model, Value> where Value == String {
+        let defaultMessage = errorMessage.isEmpty ?
+        "'\(keyPath.propertyName)' is not a valid email address."
+        :
+        errorMessage
+        
+        var rule = ValidationRule<Model>(errorMessage: {defaultMessage}) { model in
             let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
             let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
             let value = model[keyPath: keyPath]
+
             return emailPredicate.evaluate(with: value)
         }
 
-        let defaultMessage = "'\(keyPath.propertyName)' is not a valid email address."
-        validator.addRule(ValidationRule(errorMessage: { defaultMessage }, isValid: rule.isValid))
+//        let defaultMessage = "'\(keyPath.propertyName)' is not a valid email address."
+
+        validator.addRule(rule)
         return self
     }
 
