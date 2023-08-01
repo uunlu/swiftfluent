@@ -16,13 +16,27 @@ final class ObjectMappingTests: XCTestCase {
 
         validator
             .ruleFor(\.name, length: 3...10, errorMessage: "")
-//            .ruleFor(\.name, length: 5...30, errorMessage: "invalid name")
-//            .ruleFor(\.email, length: 0...5, errorMessage: "invalid email")
 
         let result = validator.validate(user)
 
         XCTAssertEqual(result.isValid, true)
 
+    }
+
+    func testObjectFieldValidation_onIsValidFalse() {
+        let user = User(name: "a name", age: 10, email: "some@email.com")
+
+        let validator = Validator<User>()
+            .ruleFor(\.email)
+            .length(5, 10)
+            .ruleFor(\.name)
+            .length(0, 3)
+
+        let result = validator.validate(user)
+
+        XCTAssertEqual(result.isValid, false)
+        XCTAssertEqual(validator.validationErrors.first, "The length of ‘String’ must be 5 to 10 characters.")
+        XCTAssertEqual(validator.validationErrors.last, "The length of ‘String’ must be 0 to 3 characters.")
     }
 
     struct User {

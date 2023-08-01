@@ -10,6 +10,16 @@ import Foundation
 public struct ValidationRule<Model> {
     public var errorMessage: String
     public let isValid: (Model) -> Bool
+
+    init(errorMessage: String, isValid: @escaping (Model) -> Bool) {
+        self.errorMessage = errorMessage
+        self.isValid = isValid
+    }
+
+    init(isValid: @escaping (Model) -> Bool) {
+        self.errorMessage = ""
+        self.isValid = isValid
+    }
 }
 
 public enum ValidationResult {
@@ -38,14 +48,25 @@ public class Validator<Model> {
         validationRules.append(rule)
     }
 
+    func addError(_ error: String) {
+        validationErrors.append(error)
+    }
+
     public func validate(_ model: Model) -> ValidationResult {
         let invalidErrors = validationRules
-            .filter { !$0.isValid(model) }
-            .map { $0.errorMessage }
+                    .filter { !$0.isValid(model) }
+                    .compactMap { $0.errorMessage } // Filter out nil errorMessage
+                    .map { errorMessage -> String in // Use a default message if errorMessage is nil
+                        if !errorMessage.isEmpty {
+                            return errorMessage
+                        } else {
+                            return "Validation failed."
+                        }
+                    }
 
-        validationErrors = invalidErrors
+                validationErrors = invalidErrors
 
-        return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors)
+                return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors)
     }
 }
 
@@ -82,29 +103,45 @@ extension Validator {
 
 extension Validator {
     @discardableResult
-    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>, length range: ClosedRange<Int>, errorMessage: String) -> Validator<Model> where Value == String {
-        var rule = ValidationRule<Model>(errorMessage: "") { model in
+    public func ruleFor(_ keyPath: KeyPath<Model, String>, length range: ClosedRange<Int>, errorMessage: String) -> Validator<Model> {
+        var message = errorMessage
+        var validator = Validator<String>()
+        let rule = ValidationRule<Model>(errorMessage: message) { model in
             let value = model[keyPath: keyPath]
-            return range.contains(value.count)
+            if message.isEmpty {
+                message = "‘\(value.self)’ must be between \(range.lowerBound) and \(range.upperBound) characters. You entered \(value.count) characters."
+            }
+
+            return validator
+                .length(range.lowerBound, range.upperBound, errorMessage: message)
+                .validate(value)
+                .isValid
         }
-        rule.errorMessage = errorMessage
+        
         addRule(rule)
         return self
     }
 
     @discardableResult
-    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>, maxLength length: Int, errorMessage: String = "") -> Validator<Model> where Value == String {
+    public func ruleFor(_ keyPath: KeyPath<Model, String>, maxLength length: Int, errorMessage: String = "") -> Validator<Model>{
         var message = errorMessage
 
         var rule = ValidationRule<Model>(errorMessage: "") { model in
             let value = model[keyPath: keyPath]
             if message.isEmpty {
-                message = "The length of ‘\(Value.self)’ must be \(length) characters or fewer. You entered \(value.count) characters."
+                message = "The length of ‘\(value.self)’ must be \(length) characters or fewer. You entered \(value.count) characters."
             }
-            return Validator<Value>().maxLength(length, errorMessage: errorMessage).validate(value).isValid
+            return Validator<String>().maxLength(length, errorMessage: errorMessage).validate(value).isValid
         }
-        rule.errorMessage = errorMessage
+        rule.errorMessage = message
         addRule(rule)
         return self
+    }
+}
+
+public extension Validator {
+    @discardableResult
+    func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>) -> RuleForBuilder<Model, Value> {
+        return RuleForBuilder(keyPath: keyPath, validator: self)
     }
 }
