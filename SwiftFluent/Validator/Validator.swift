@@ -107,15 +107,4 @@ extension Validator {
         addRule(rule)
         return self
     }
-
-    @discardableResult
-    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>, maxLength length: Int, errorMessage: String, isValid: @escaping (Model) -> Bool) -> Validator<Model> where Value == String {
-        var rule = ValidationRule<Model>(errorMessage: errorMessage) { model in
-            return isValid(model)
-        }
-        rule.errorMessage = errorMessage
-        addRule(rule)
-        return self
-    }
-
 }
