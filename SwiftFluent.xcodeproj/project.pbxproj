@@ -19,6 +19,7 @@
 		60DB780D2A786133005D539A /* CreditCardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB780C2A786133005D539A /* CreditCardValidator.swift */; };
 		60DB78402A791A89005D539A /* ObjectMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB783F2A791A89005D539A /* ObjectMappingTests.swift */; };
 		60DB78432A7944E0005D539A /* RuleForBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78422A7944E0005D539A /* RuleForBuilder.swift */; };
+		60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78452A794717005D539A /* RuleForBuilder+String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		60DB780C2A786133005D539A /* CreditCardValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardValidator.swift; sourceTree = "<group>"; };
 		60DB783F2A791A89005D539A /* ObjectMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMappingTests.swift; sourceTree = "<group>"; };
 		60DB78422A7944E0005D539A /* RuleForBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleForBuilder.swift; sourceTree = "<group>"; };
+		60DB78452A794717005D539A /* RuleForBuilder+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +114,18 @@
 				60DB78082A78303A005D539A /* Validator+String.swift */,
 				60DB780A2A7843A6005D539A /* Validator+Comparable.swift */,
 				60DB780C2A786133005D539A /* CreditCardValidator.swift */,
-				60DB78422A7944E0005D539A /* RuleForBuilder.swift */,
+				60DB78442A794701005D539A /* RuleForBuilder */,
 			);
 			path = Validator;
+			sourceTree = "<group>";
+		};
+		60DB78442A794701005D539A /* RuleForBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				60DB78422A7944E0005D539A /* RuleForBuilder.swift */,
+				60DB78452A794717005D539A /* RuleForBuilder+String.swift */,
+			);
+			path = RuleForBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 			files = (
 				60DB78092A78303B005D539A /* Validator+String.swift in Sources */,
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
+				60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */,
 				60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */,
 				60DB780D2A786133005D539A /* CreditCardValidator.swift in Sources */,
 				60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */,

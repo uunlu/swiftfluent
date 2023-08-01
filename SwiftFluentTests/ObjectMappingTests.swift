@@ -11,7 +11,7 @@ import SwiftFluent
 final class ObjectMappingTests: XCTestCase {
 
     func testObjectFieldsValidation() throws {
-        let user = User(name: "a name", age: 10, email: "some@email.com")
+        let user = makeSUT()
         let validator = Validator<User>()
 
         validator
@@ -24,25 +24,48 @@ final class ObjectMappingTests: XCTestCase {
     }
 
     func testObjectFieldValidation_onIsValidFalse() {
-        let user = User(name: "a name", age: 10, email: "some@email.com")
+        let user = makeSUT()
 
         let validator = Validator<User>()
             .ruleFor(\.email)
             .length(5, 10)
+            .email()
             .ruleFor(\.name)
             .length(0, 3)
+            .build()
+
 
         let result = validator.validate(user)
 
         XCTAssertEqual(result.isValid, false)
-        XCTAssertEqual(validator.validationErrors.first, "The length of ‘String’ must be 5 to 10 characters.")
-        XCTAssertEqual(validator.validationErrors.last, "The length of ‘String’ must be 0 to 3 characters.")
+        XCTAssertEqual(validator.validationErrors.first, "The length of ‘email’ must be between 5 and 10 characters.")
+        XCTAssertEqual(validator.validationErrors.last, "The length of ‘name’ must be between 0 and 3 characters.")
+    }
+
+    func testObjectCreditCardVAlidation_onIsValidFalse() throws {
+        let user = makeSUT()
+
+        let validator = Validator<User>()
+            .ruleFor(\.creditCardNumber)
+            .creditCard()
+            .build()
+
+        let result = validator.validate(user)
+
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.first, "‘creditCardNumber’ is not a valid credit card number.")
+    }
+
+    private func makeSUT(name: String = "a name", age: Int = 20, email: String = "some@mail.com", creditCardNumber: String = "") -> User {
+        User(name: name, age: age, email: email, creditCardNumber: creditCardNumber)
     }
 
     struct User {
         let name: String
         let age: Int
         let email: String
+        let creditCardNumber: String
     }
 
 }

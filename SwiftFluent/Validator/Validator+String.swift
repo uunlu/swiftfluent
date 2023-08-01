@@ -21,7 +21,7 @@ extension Validator where Model == String{
     @discardableResult
     public func email(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { $0.isValidEmail() }
         )
         addRule(rule)
@@ -46,7 +46,7 @@ extension Validator where Model == String{
     @discardableResult
     public func creditCard(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { CreditCardValidator.isValid($0) }
         )
         addRule(rule)
@@ -56,7 +56,7 @@ extension Validator where Model == String{
     @discardableResult
     public func number(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { $0.containsOnlyNumbers() }
         )
         addRule(rule)
@@ -80,7 +80,7 @@ extension Validator where Model == String{
     @discardableResult
     public func notEmpty(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { $0.isNotEmpty() }
         )
         addRule(rule)
@@ -104,7 +104,7 @@ extension Validator where Model == String{
     @discardableResult
     public func notEqual(to value: Model, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { !$0.elementsEqual(value) }
         )
         addRule(rule)
@@ -128,7 +128,7 @@ extension Validator where Model == String{
     @discardableResult
     public func length(_ min: Int, _ max: Int, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { $0.count >= min && $0.count < max }
         )
         addRule(rule)
@@ -151,7 +151,7 @@ extension Validator where Model == String{
     @discardableResult
     public func minLength(_ length: Int, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { $0.count >= length }
         )
         addRule(rule)
@@ -174,7 +174,7 @@ extension Validator where Model == String{
     @discardableResult
     public func maxLength(_ length: Int, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: errorMessage,
+            errorMessage: {errorMessage},
             isValid: { $0.count <= length }
         )
         addRule(rule)
@@ -184,7 +184,7 @@ extension Validator where Model == String{
 
 // MARK: - String extensions
 
-fileprivate extension String {
+internal extension String {
     func isValidEmail() -> Bool {
         // Regular expression pattern to match email addresses
         let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
