@@ -426,6 +426,40 @@ final class ObjectMappingTests: XCTestCase {
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
 
+    func testObjectMinLength_onIsValidFalse() throws {
+        let user = makeSUT(name: "name")
+
+        let validator = Validator<User>()
+            .ruleFor(\.name)
+            .minLength(5)
+            .ruleFor(\.email)
+            .minLength(25)
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 2)
+        XCTAssertEqual(validator.validationErrors.first, "The length of ‘name’ must be 5 characters or more.")
+        XCTAssertEqual(validator.validationErrors.last, "The length of ‘email’ must be 25 characters or more.")
+    }
+
+    func testObjectMinLength_onIsValidTrue() throws {
+        let user = makeSUT(name: "a name")
+
+        let validator = Validator<User>()
+            .ruleFor(\.name)
+            .minLength(5)
+            .ruleFor(\.email)
+            .minLength(5)
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
+    }
+
     private func makeSUT(
         name: String = "a name",
         age: Int = 20,
