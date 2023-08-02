@@ -479,18 +479,36 @@ final class ObjectMappingTests: XCTestCase {
     }
 
     func testObjectCustomValidation_onIsValidFalse() throws {
-        let user = makeSUT(name: "a name")
+        let notValidEmail = "mail@hotmail.com"
+        let user = makeSUT(name: "a name", email: notValidEmail)
 
+        func isFreeEmail(_ email: String) -> Bool {
+            let freeEmailDomains = [
+                "gmail.com",
+                "yahoo.com",
+                "outlook.com",
+                "hotmail.com",
+            ]
+            guard let domain = email.split(separator: "@").last else {
+                return false
+            }
+            let lowercaseDomain = String(domain).lowercased()
+            return freeEmailDomains.contains(lowercaseDomain)
+        }
+
+        let errorMessage = "This domain email address is not accepted."
         let validator = Validator<User>()
             .ruleFor(\.name)
             .minLength(5)
             .ruleFor(\.email)
+            .validate(errorMessage) { isFreeEmail($0) == false }
             .build()
 
         let result = validator.validate(user)
 
-        XCTAssertTrue(result.isValid)
-        XCTAssertEqual(validator.validationErrors.count, 0)
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 1)
+        XCTAssertEqual(validator.validationErrors.first, errorMessage)
     }
 
     private func makeSUT(
