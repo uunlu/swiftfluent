@@ -19,24 +19,6 @@ public struct RuleForBuilder<Model, Value> {
 
 
 public extension RuleForBuilder {
-    func length(_ min: Int, _ max: Int) -> RuleForBuilder<Model, Value> where Value == String {
-        let rule = ValidationRule<Model> { model in
-            let value = model[keyPath: keyPath]
-            return value.count >= min && value.count <= max
-        }
-
-        let defaultMessage = "The length of ‘\(keyPath.propertyName)’ must be between \(min) and \(max) characters."
-        validator.addRule(ValidationRule(errorMessage: { defaultMessage }, isValid: rule.isValid))
-        return self
-    }
-
-    class ErrorMessage {
-        var message: String
-
-        init(_ message: String) {
-            self.message = message
-        }
-    }
 
     func email(errorMessage: String = "") -> RuleForBuilder<Model, Value> where Value == String {
         let defaultMessage = errorMessage.isEmpty ?
