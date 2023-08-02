@@ -92,6 +92,23 @@ final class ObjectMappingTests: XCTestCase {
         XCTAssertEqual(validator.validationErrors.first, "‘age’ must be less than 10.")
     }
 
+    func testObjectGreaterThan_onIsValidTrue() throws {
+        let user = makeSUT(name: "name")
+
+        let validator = Validator<User>()
+            .ruleFor(\.age)
+            .greaterThan(10)
+            .ruleFor(\.name)
+            .greaterThan("good")
+            .build()
+
+        let result = validator.validate(user)
+
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
+    }
+
     private func makeSUT(name: String = "a name", age: Int = 20, email: String = "some@mail.com", creditCardNumber: String = "") -> User {
         User(name: name, age: age, email: email, creditCardNumber: creditCardNumber)
     }

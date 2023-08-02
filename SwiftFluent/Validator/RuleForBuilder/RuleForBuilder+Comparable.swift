@@ -8,8 +8,9 @@
 import Foundation
 
 
+// MARK: - lessThan
+
 public extension RuleForBuilder where Value: Comparable {
-    // MARK: - lessThan
 
     /**
      Adds a validation rule to check if the value of the property is less than the specified `maxValue`.
@@ -60,6 +61,29 @@ public extension RuleForBuilder where Value: Comparable {
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
             return propertyValue < maxValue
+        }
+        validator.addRule(rule)
+    }
+}
+
+// MARK: - greaterThan
+
+public extension RuleForBuilder where Value: Comparable {
+    func greaterThan(_ maxValue: Value, errorMessage: String? = nil) -> RuleForBuilder<Model, Value> {
+        buildGreaterthan(errorMessage, maxValue)
+        return self
+    }
+
+    func greaterThan(_ maxValue: Value, errorMessage: String? = nil) -> Validator<Model> {
+        buildGreaterthan(errorMessage, maxValue)
+        return validator
+    }
+
+    fileprivate func buildGreaterthan(_ errorMessage: String?, _ maxValue: Value) {
+        let error = errorMessage ?? "‘\(keyPath.propertyName)’ must be greater than \(maxValue)."
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
+            let propertyValue = model[keyPath: keyPath]
+            return propertyValue > maxValue
         }
         validator.addRule(rule)
     }
