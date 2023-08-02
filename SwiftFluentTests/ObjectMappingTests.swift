@@ -75,20 +75,20 @@ final class ObjectMappingTests: XCTestCase {
     }
 
     func testObjectLessThan_onIsValidFalse() throws {
-        let user = makeSUT()
+        let user = makeSUT(name: "name")
 
         let validator = Validator<User>()
             .ruleFor(\.age)
             .lessThan(10)
-            .build()
             .ruleFor(\.name)
-            .lessThan("")
+            .lessThan("good")
             .build()
 
         let result = validator.validate(user)
 
 
         XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 2)
         XCTAssertEqual(validator.validationErrors.first, "‘age’ must be less than 10.")
     }
 
