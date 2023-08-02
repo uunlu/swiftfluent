@@ -11,14 +11,14 @@ import Foundation
 // MARK: - lessThan
 
 public extension RuleForBuilder where Value: Comparable {
-
+    
     /**
      Adds a validation rule to check if the value of the property is less than the specified `maxValue`.
-
+     
      - Parameter maxValue: The maximum value allowed for the property.
      - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
      - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
-
+     
      Example usage:
      ```
      let validator = Validator<User>()
@@ -33,14 +33,14 @@ public extension RuleForBuilder where Value: Comparable {
         buildLessthan(errorMessage, maxValue)
         return self
     }
-
+    
     /**
      Adds a validation rule to check if the value of the property is less than the specified `maxValue`.
-
+     
      - Parameter maxValue: The maximum value allowed for the property.
      - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
      - Returns: The `Validator` instance to allow further rule definitions for different properties.
-
+     
      Example usage:
      ```
      let validator = Validator<User>()
@@ -55,7 +55,7 @@ public extension RuleForBuilder where Value: Comparable {
         buildLessthan(errorMessage, maxValue)
         return validator
     }
-
+    
     fileprivate func buildLessthan(_ errorMessage: String?, _ maxValue: Value) {
         let error = errorMessage ?? "‘\(keyPath.propertyName)’ must be less than \(maxValue)."
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
@@ -69,14 +69,14 @@ public extension RuleForBuilder where Value: Comparable {
 // MARK: - lessThanOrEqualTo
 
 public extension RuleForBuilder where Value: Comparable {
-
+    
     /**
      Adds a validation rule to check if the value of the property is less than or equal to the specified `maxValue`.
-
+     
      - Parameter maxValue: The maximum value allowed for the property.
      - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
      - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
-
+     
      Example usage:
      ```
      let validator = Validator<User>()
@@ -91,14 +91,14 @@ public extension RuleForBuilder where Value: Comparable {
         buildLessThanOrEqualTo(errorMessage, maxValue)
         return self
     }
-
+    
     /**
      Adds a validation rule to check if the value of the property is less than or equal to the specified `maxValue`.
-
+     
      - Parameter maxValue: The maximum value allowed for the property.
      - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
      - Returns: The `Validator` instance to allow further rule definitions for different properties.
-
+     
      Example usage:
      ```
      let validator = Validator<User>()
@@ -113,7 +113,7 @@ public extension RuleForBuilder where Value: Comparable {
         buildLessThanOrEqualTo(errorMessage, maxValue)
         return validator
     }
-
+    
     fileprivate func buildLessThanOrEqualTo(_ errorMessage: String?, _ maxValue: Value) {
         let error = errorMessage ?? "‘\(keyPath.propertyName)’ must be less than or equal to \(maxValue)."
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
@@ -129,11 +129,11 @@ public extension RuleForBuilder where Value: Comparable {
 public extension RuleForBuilder where Value: Comparable {
     /**
      Adds a validation rule to check if the value of the property is greater than the specified `maxValue`.
-
+     
      - Parameter minValue: The minimum value allowed for the property.
      - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
      - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
-
+     
      Example usage:
      ```
      let validator = Validator<User>()
@@ -148,14 +148,14 @@ public extension RuleForBuilder where Value: Comparable {
         buildGreaterthan(errorMessage, minValue)
         return self
     }
-
+    
     /**
      Adds a validation rule to check if the value of the property is greater than the specified `minValue`.
-
+     
      - Parameter minValue: The minimum value allowed for the property.
      - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
      - Returns: The `Validator` instance to allow further rule definitions for different properties.
-
+     
      Example usage:
      ```
      let validator = Validator<User>()
@@ -170,12 +170,70 @@ public extension RuleForBuilder where Value: Comparable {
         buildGreaterthan(errorMessage, minValue)
         return validator
     }
-
+    
     fileprivate func buildGreaterthan(_ errorMessage: String?, _ minValue: Value) {
         let error = errorMessage ?? "‘\(keyPath.propertyName)’ must be greater than \(minValue)."
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
             return propertyValue > minValue
+        }
+        validator.addRule(rule)
+    }
+}
+
+// MARK: - greaterThanOrEqualTo
+
+public extension RuleForBuilder where Value: Comparable {
+    
+    /**
+     Adds a validation rule to check if the value of the property is greater than or equal to the specified `minValue`.
+     
+     - Parameter minValue: The minimum value allowed for the property.
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
+     
+     Example usage:
+     ```
+     let validator = Validator<User>()
+     .ruleFor(.age)
+     .greaterThanOrEqualTo(18, errorMessage: "Age must be greater than or equal to 18.")
+     .ruleFor(.score)
+     .greaterThanOrEqualTo(0) // Uses the default error message.
+     ```
+     - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "The value of 'KeyPath' must be greater than or equal to 'minValue'.". The actual property name and `minValue` will be dynamically inserted into the error message.
+     */
+    func greaterThanOrEqualTo(_ minValue: Value, errorMessage: String? = nil) -> RuleForBuilder<Model, Value> {
+        buildgreaterThanOrEqualTo(errorMessage, minValue)
+        return self
+    }
+    
+    /**
+     Adds a validation rule to check if the value of the property is greater than or equal to the specified `minValue`.
+     
+     - Parameter minValue: The minimum value allowed for the property.
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `Validator` instance to allow further rule definitions for different properties.
+     
+     Example usage:
+     ```
+     let validator = Validator<User>()
+     .ruleFor(.age)
+     .greaterThanOrEqualTo(18, errorMessage: "Age must be greater than or equal to 18.")
+     .ruleFor(.score)
+     .greaterThanOrEqualTo(0) // Uses the default error message.
+     ```
+     - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "The value of 'KeyPath' must be greater than or equal to 'minValue'.". The actual property name and `minValue` will be dynamically inserted into the error message.
+     */
+    func greaterThanOrEqualTo(_ minValue: Value, errorMessage: String? = nil) -> Validator<Model> {
+        buildgreaterThanOrEqualTo(errorMessage, minValue)
+        return validator
+    }
+    
+    fileprivate func buildgreaterThanOrEqualTo(_ errorMessage: String?, _ minValue: Value) {
+        let error = errorMessage ?? "‘\(keyPath.propertyName)’ must be greater than or equal to \(minValue)."
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
+            let propertyValue = model[keyPath: keyPath]
+            return propertyValue >= minValue
         }
         validator.addRule(rule)
     }
