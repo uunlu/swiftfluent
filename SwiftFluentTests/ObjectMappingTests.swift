@@ -478,6 +478,21 @@ final class ObjectMappingTests: XCTestCase {
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
 
+    func testObjectCustomValidation_onIsValidFalse() throws {
+        let user = makeSUT(name: "a name")
+
+        let validator = Validator<User>()
+            .ruleFor(\.name)
+            .minLength(5)
+            .ruleFor(\.email)
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
+    }
+
     private func makeSUT(
         name: String = "a name",
         age: Int = 20,

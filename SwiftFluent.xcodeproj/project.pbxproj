@@ -24,6 +24,7 @@
 		60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */; };
 		60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */; };
 		60DB784E2A7A8330005D539A /* RuleForBuilder+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */; };
+		60DB78512A7ADD7D005D539A /* KeyPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78502A7ADD7D005D539A /* KeyPath+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+OptionalType.swift"; sourceTree = "<group>"; };
 		60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Collection.swift"; sourceTree = "<group>"; };
 		60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Equatable.swift"; sourceTree = "<group>"; };
+		60DB78502A7ADD7D005D539A /* KeyPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyPath+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		60A949482A77CED0001D17A9 /* SwiftFluent */ = {
 			isa = PBXGroup;
 			children = (
+				60DB784F2A7ADD58005D539A /* Utilities */,
 				60A949602A77CF0B001D17A9 /* Validator */,
 				60A949492A77CED0001D17A9 /* SwiftFluent.h */,
 				60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */,
@@ -138,6 +141,14 @@
 				60DB78452A794717005D539A /* RuleForBuilder+String.swift */,
 			);
 			path = RuleForBuilder;
+			sourceTree = "<group>";
+		};
+		60DB784F2A7ADD58005D539A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				60DB78502A7ADD7D005D539A /* KeyPath+Extensions.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +272,7 @@
 				60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */,
 				60DB78432A7944E0005D539A /* RuleForBuilder.swift in Sources */,
 				60DB780B2A7843A6005D539A /* Validator+Comparable.swift in Sources */,
+				60DB78512A7ADD7D005D539A /* KeyPath+Extensions.swift in Sources */,
 				60A9494B2A77CED0001D17A9 /* SwiftFluent.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
