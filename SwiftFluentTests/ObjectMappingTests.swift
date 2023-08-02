@@ -372,8 +372,8 @@ final class ObjectMappingTests: XCTestCase {
 
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 2)
-        XCTAssertEqual(validator.validationErrors.first, "The length of ‘name’ must be between 5 to 25 characters.")
-        XCTAssertEqual(validator.validationErrors.last, "The length of ‘email’ must be between 0 to 5 characters.")
+        XCTAssertEqual(validator.validationErrors.first, "The length of ‘name’ must be between 5 and 25 characters.")
+        XCTAssertEqual(validator.validationErrors.last, "The length of ‘email’ must be between 0 and 5 characters.")
     }
 
     func testObjectLength_onIsValidTrue() throws {

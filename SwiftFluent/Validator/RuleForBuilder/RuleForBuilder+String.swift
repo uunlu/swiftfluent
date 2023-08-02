@@ -66,7 +66,7 @@ public extension RuleForBuilder where Value == String {
     }
 
     fileprivate func buildLength(_ min: Int, max: Int, errorMessage: String?) {
-        let error = errorMessage ?? "The length of ‘\(keyPath.propertyName)’ must be between \(min) to \(max) characters."
+        let error = errorMessage ?? "The length of ‘\(keyPath.propertyName)’ must be between \(min) and \(max) characters."
 
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
@@ -77,3 +77,35 @@ public extension RuleForBuilder where Value == String {
     }
 }
 
+// MARK: - email
+
+public extension RuleForBuilder where Value == String {
+    func email(errorMessage: String? = nil) -> RuleForBuilder<Model, Value> {
+        buildEmail(errorMessage: errorMessage)
+        return self
+    }
+
+    func email(errorMessage: String? = nil) -> Validator<Model> {
+        buildEmail(errorMessage: errorMessage)
+        return validator
+    }
+
+    fileprivate func buildEmail(errorMessage: String?) {
+        let defaultMessage = errorMessage ??
+        "'\(keyPath.propertyName)' is not a valid email address."
+
+        let rule = ValidationRule<Model>(errorMessage:{defaultMessage}) { model in
+            let value = model[keyPath: keyPath]
+            return validateEmail(value)
+        }
+
+        validator.addRule(rule)
+    }
+
+    private func validateEmail(_ email: String, regex: String? = nil) -> Bool {
+        let emailRegex = regex ?? "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+
+        return emailPredicate.evaluate(with: email)
+    }
+}
