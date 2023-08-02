@@ -10,6 +10,8 @@ import SwiftFluent
 
 final class ObjectMappingTests: XCTestCase {
 
+    private let validCreditCardNumber = "3566002020360505"
+
     func testObjectFieldsValidation() throws {
         let user = makeSUT()
         let validator = Validator<User>()
@@ -60,18 +62,34 @@ final class ObjectMappingTests: XCTestCase {
     }
 
     func testObjectCreditCardVAlidation_onIsValidFalse() throws {
-        let user = makeSUT()
+        let user = makeSUT(creditCardNumber: "")
 
         let validator = Validator<User>()
             .ruleFor(\.creditCardNumber)
             .creditCard()
+            .notEmpty()
             .build()
 
         let result = validator.validate(user)
 
-
+        let expectedError = "‘creditCardNumber‘ is not a valid credit card number."
         XCTAssertFalse(result.isValid)
-        XCTAssertEqual(validator.validationErrors.first, "‘creditCardNumber’ is not a valid credit card number.")
+        XCTAssertEqual(validator.validationErrors.first, expectedError)
+    }
+
+    func testObjectCreditCardVAlidation_onIsValidTrue() throws {
+        let user = makeSUT(creditCardNumber: validCreditCardNumber)
+
+        let validator = Validator<User>()
+            .ruleFor(\.creditCardNumber)
+            .creditCard()
+            .notEmpty()
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
     }
 
     func testObjectLessThan_onIsValidFalse() throws {
@@ -486,5 +504,6 @@ final class ObjectMappingTests: XCTestCase {
         let favoriteBooks: [String]
         let profileImageURL: String?
     }
-
 }
+
+

@@ -20,16 +20,16 @@ public struct RuleForBuilder<Model, Value> {
 
 public extension RuleForBuilder {
 
-    func creditCard(errorMessage: String = "") -> RuleForBuilder<Model, Value> where Value == String {
-        let rule = ValidationRule<Model>() { model in
-            let value = model[keyPath: keyPath]
-            return CreditCardValidator.isValid(value)
-        }
-
-        let defaultMessage = "‘\(keyPath.propertyName)’ is not a valid credit card number."
-        validator.addRule(ValidationRule(errorMessage: { defaultMessage }, isValid: rule.isValid))
-        return self
-    }
+//    func creditCard(errorMessage: String = "") -> RuleForBuilder<Model, Value> where Value == String {
+//        let rule = ValidationRule<Model>() { model in
+//            let value = model[keyPath: keyPath]
+//            return CreditCardValidator.isValid(value)
+//        }
+//
+//        let defaultMessage = "‘\(keyPath.propertyName)’ is not a valid credit card number."
+//        validator.addRule(ValidationRule(errorMessage: { defaultMessage }, isValid: rule.isValid))
+//        return self
+//    }
 
     func build() -> Validator<Model> {
         return validator

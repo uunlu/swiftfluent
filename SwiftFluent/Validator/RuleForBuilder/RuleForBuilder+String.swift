@@ -274,3 +274,59 @@ public extension RuleForBuilder where Value == String {
         return emailPredicate.evaluate(with: email)
     }
 }
+
+// MARK: - creditCard
+
+public extension RuleForBuilder where Value == String {
+
+    /**
+     Adds a validation rule to check if the value of the property is a valid credit card number.
+
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
+
+     Example usage:
+     let validator = Validator<User>()
+     .ruleFor(.creditCardNumber)
+     .creditCard(errorMessage: "Invalid credit card number.")
+     .ruleFor(.name)
+     .creditCard() // Uses the default error message.
+     - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ is not a valid credit card number." where `keyPath.propertyName` represents the name of the property being validated.
+     */
+    func creditCard(_ errorMessage: String? = nil) -> RuleForBuilder<Model, Value> {
+        buildCreditCard(errorMessage)
+        return self
+    }
+
+    /**
+     Adds a validation rule to check if the value of the property is a valid credit card number.
+
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `Validator` instance to allow further rule definitions for different properties.
+
+     Example usage:
+     ```
+     let validator = Validator<User>()
+     .ruleFor(.creditCardNumber)
+     .creditCard(errorMessage: "Invalid credit card number.")
+     .build()
+     ```
+     - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘creditCardNumber’ is not a valid credit card number.".
+     */
+    func creditCard(_ errorMessage: String? = nil) -> Validator<Model> {
+        buildCreditCard(errorMessage)
+        return validator
+    }
+
+    private func buildCreditCard(_ errorMessage: String?) {
+        let defaultMessage = errorMessage ?? "‘\(keyPath.propertyName)‘ is not a valid credit card number."
+
+        let rule = ValidationRule<Model>(errorMessage: {defaultMessage}) { model in
+            let value = model[keyPath: keyPath]
+
+            return CreditCardValidator.isValid(value)
+        }
+
+        validator.addRule(rule)
+    }
+}
