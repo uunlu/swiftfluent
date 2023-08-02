@@ -192,13 +192,51 @@ final class ObjectMappingTests: XCTestCase {
 
         let result = validator.validate(user)
 
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
+    }
+
+    func testObjectNotNil_onIsValidFalse() throws {
+        let user = makeSUT()
+
+        let validator = Validator<User>()
+            .ruleFor(\.age)
+            .greaterThan(18)
+            .ruleFor(\.profileImageURL)
+            .notNil()
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 1)
+        XCTAssertEqual(validator.validationErrors.first, "‘profileImageURL’ must not be not nil.")
+    }
+
+    func testObjectNotNil_onIsValidTrue() throws {
+        let user = makeSUT(profileImageURL: "https://www.some-image.com")
+
+        let validator = Validator<User>()
+            .ruleFor(\.age)
+            .greaterThan(18)
+            .ruleFor(\.profileImageURL)
+            .notNil()
+            .build()
+
+        let result = validator.validate(user)
 
         XCTAssertTrue(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
 
-    private func makeSUT(name: String = "a name", age: Int = 20, email: String = "some@mail.com", creditCardNumber: String = "") -> User {
-        User(name: name, age: age, email: email, creditCardNumber: creditCardNumber)
+    private func makeSUT(
+        name: String = "a name",
+        age: Int = 20,
+        email: String = "some@mail.com",
+        creditCardNumber: String = "",
+        profileImageURL: String? = nil
+    ) -> User {
+        User(name: name, age: age, email: email, creditCardNumber: creditCardNumber, profileImageURL: profileImageURL)
     }
 
     struct User {
@@ -206,6 +244,7 @@ final class ObjectMappingTests: XCTestCase {
         let age: Int
         let email: String
         let creditCardNumber: String
+        let profileImageURL: String?
     }
 
 }

@@ -21,6 +21,7 @@
 		60DB78432A7944E0005D539A /* RuleForBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78422A7944E0005D539A /* RuleForBuilder.swift */; };
 		60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78452A794717005D539A /* RuleForBuilder+String.swift */; };
 		60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */; };
+		60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		60DB78422A7944E0005D539A /* RuleForBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleForBuilder.swift; sourceTree = "<group>"; };
 		60DB78452A794717005D539A /* RuleForBuilder+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+String.swift"; sourceTree = "<group>"; };
 		60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Comparable.swift"; sourceTree = "<group>"; };
+		60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+OptionalType.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				60DB78422A7944E0005D539A /* RuleForBuilder.swift */,
+				60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */,
 				60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */,
 				60DB78452A794717005D539A /* RuleForBuilder+String.swift */,
 			);
@@ -242,6 +245,7 @@
 			files = (
 				60DB78092A78303B005D539A /* Validator+String.swift in Sources */,
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
+				60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */,
 				60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */,
 				60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */,
 				60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */,
