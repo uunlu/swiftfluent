@@ -48,10 +48,6 @@ public class Validator<Model> {
         validationRules.append(rule)
     }
 
-    func addError(_ error: String) {
-        validationErrors.append(error)
-    }
-
     public func validate(_ model: Model) -> ValidationResult {
         let invalidErrors = validationRules
                     .filter { !$0.isValid(model) }
@@ -94,45 +90,6 @@ extension Validator {
         let rule = ValidationRule<Model>(
             isValid: condition
         )
-        addRule(rule)
-        return self
-    }
-}
-
-
-extension Validator {
-    @discardableResult
-    public func ruleFor(_ keyPath: KeyPath<Model, String>, length range: ClosedRange<Int>, errorMessage: String) -> Validator<Model> {
-        var message = errorMessage
-        var validator = Validator<String>()
-        let rule = ValidationRule<Model>(errorMessage: { message} ) { model in
-            let value = model[keyPath: keyPath]
-            if message.isEmpty {
-                message = "‘\(value.self)’ must be between \(range.lowerBound) and \(range.upperBound) characters. You entered \(value.count) characters."
-            }
-
-            return validator
-                .length(range.lowerBound, range.upperBound, errorMessage: message)
-                .validate(value)
-                .isValid
-        }
-        
-        addRule(rule)
-        return self
-    }
-
-    @discardableResult
-    public func ruleFor(_ keyPath: KeyPath<Model, String>, maxLength length: Int, errorMessage: String = "") -> Validator<Model>{
-        var message = errorMessage
-
-        var rule = ValidationRule<Model>() { model in
-            let value = model[keyPath: keyPath]
-            if message.isEmpty {
-                message = "The length of ‘\(value.self)’ must be \(length) characters or fewer. You entered \(value.count) characters."
-            }
-            return Validator<String>().maxLength(length, errorMessage: errorMessage).validate(value).isValid
-        }
-        rule.errorMessage = { message }
         addRule(rule)
         return self
     }

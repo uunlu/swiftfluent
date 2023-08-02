@@ -15,14 +15,13 @@ final class ObjectMappingTests: XCTestCase {
     func testObjectFieldsValidation() throws {
         let user = makeSUT()
         let validator = Validator<User>()
-
-        validator
-            .ruleFor(\.name, length: 3...10, errorMessage: "")
+            .ruleFor(\.name)
+            .length(0, 10)
+            .build()
 
         let result = validator.validate(user)
 
         XCTAssertEqual(result.isValid, true)
-
     }
 
     func testObjectFieldValidation_onIsValidFalse() {
