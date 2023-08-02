@@ -267,6 +267,50 @@ final class ObjectMappingTests: XCTestCase {
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
 
+    func testObjectEqual_onIsValidFalse() throws {
+        let user = makeSUT(favoriteBooks: ["Alquimista"], profileImageURL: "https://some-image.com")
+        let notEqualUrlString: String? = "https://not-equal.com"
+
+        let validator = Validator<User>()
+            .ruleFor(\.age)
+            .equal(18)
+            .ruleFor(\.profileImageURL)
+            .notNil()
+            .equal(notEqualUrlString)
+            .ruleFor(\.favoriteBooks)
+            .notEmpty()
+            .equal([])
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 3)
+        XCTAssertEqual(validator.validationErrors.first, "‘age’ should be equal to 18.")
+        XCTAssertEqual(validator.validationErrors[1], "‘profileImageURL’ should be equal to \(String(describing: notEqualUrlString)).")
+        XCTAssertEqual(validator.validationErrors.last, "‘favoriteBooks’ should be equal to [].")
+    }
+
+    func testObjectEqual_onIsValidTrue() throws {
+        let user = makeSUT(favoriteBooks: ["Alquimista"], profileImageURL: "https://some-image.com")
+
+        let validator = Validator<User>()
+            .ruleFor(\.age)
+            .equal(20)
+            .ruleFor(\.profileImageURL)
+            .notNil()
+            .equal("https://some-image.com")
+            .ruleFor(\.favoriteBooks)
+            .notEmpty()
+            .equal(["Alquimista"])
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
+    }
+
     private func makeSUT(
         name: String = "a name",
         age: Int = 20,

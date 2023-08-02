@@ -23,6 +23,7 @@
 		60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */; };
 		60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */; };
 		60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */; };
+		60DB784E2A7A8330005D539A /* RuleForBuilder+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Comparable.swift"; sourceTree = "<group>"; };
 		60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+OptionalType.swift"; sourceTree = "<group>"; };
 		60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Collection.swift"; sourceTree = "<group>"; };
+		60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Equatable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				60DB78422A7944E0005D539A /* RuleForBuilder.swift */,
+				60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */,
 				60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */,
 				60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */,
 				60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */,
@@ -250,6 +253,7 @@
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
 				60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */,
 				60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */,
+				60DB784E2A7A8330005D539A /* RuleForBuilder+Equatable.swift in Sources */,
 				60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */,
 				60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */,
 				60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */,
