@@ -21,7 +21,7 @@ public struct RuleForBuilder<Model, Value> {
     }
 
     public func validate(_ errorMessage: String = "", condition: @escaping (Value) -> Bool) -> RuleForBuilder<Model, Value> {
-        let rule = ValidationRule<Model>(errorMessage: {errorMessage}) { model in
+        let rule = ValidationRule<Model>(errorMessage: {(keyPath.propertyName, errorMessage)}) { model in
             let value = model[keyPath: keyPath]
             return condition(value)
         }

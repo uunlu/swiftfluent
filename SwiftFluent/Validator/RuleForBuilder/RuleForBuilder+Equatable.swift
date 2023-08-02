@@ -55,7 +55,7 @@ public extension RuleForBuilder where Value: Equatable  {
     }
 
     fileprivate func buildEqual(_ value: Value, _ errorMessage: String?) {
-        let error = errorMessage ?? "‘\(keyPath.propertyName)’ should be equal to \(value)."
+        let error = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)’ should be equal to \(value).")
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
             return propertyValue == value
@@ -113,7 +113,7 @@ public extension RuleForBuilder where Value: Equatable  {
     }
 
     fileprivate func buildNotEqual(_ value: Value, _ errorMessage: String?) {
-        let error = errorMessage ?? "‘\(keyPath.propertyName)’ should not be equal to \(value)."
+        let error = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)’ should not be equal to \(value).")
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
             return propertyValue != value

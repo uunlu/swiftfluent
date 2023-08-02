@@ -8,16 +8,16 @@
 import Foundation
 
 public struct ValidationRule<Model> {
-    public var errorMessage: () -> String
+    public var errorMessage: () -> (String, String)
     public let isValid: (Model) -> Bool
 
-    init(errorMessage: @escaping () -> String, isValid: @escaping (Model) -> Bool) {
+    init(errorMessage: @escaping () -> (String, String), isValid: @escaping (Model) -> Bool) {
         self.errorMessage = errorMessage
         self.isValid = isValid
     }
 
     init(isValid: @escaping (Model) -> Bool) {
-        self.errorMessage = { "" }
+        self.errorMessage = { ("", "") }
         self.isValid = isValid
     }
 }
@@ -37,6 +37,7 @@ public enum ValidationResult {
 public class Validator<Model> {
     private var validationRules: [ValidationRule<Model>] = []
     private(set) public var validationErrors: [String] = []
+    private(set) public var validationsMap: [String: [String]] = [:]
 
     public init() { }
 
@@ -52,17 +53,26 @@ public class Validator<Model> {
         let invalidErrors = validationRules
                     .filter { !$0.isValid(model) }
                     .compactMap { $0.errorMessage } // Filter out nil errorMessage
-                    .map { errorMessage -> String in // Use a default message if errorMessage is nil
-                        if !errorMessage().isEmpty {
+                    .map { errorMessage -> (String, String) in // Use a default message if errorMessage is nil
+                        if !errorMessage().1.isEmpty {
                             return errorMessage()
                         } else {
-                            return "Validation failed."
+                            return ("", "Validation failed.")
                         }
                     }
 
-                validationErrors = invalidErrors
+        validationErrors = invalidErrors.map { $0.1}
 
-                return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors)
+        for (propertyKey, errorMessage) in invalidErrors {
+            if var errors = validationsMap[propertyKey] {
+                errors.append(errorMessage)
+                validationsMap[propertyKey] = errors
+            } else {
+                validationsMap[propertyKey] = [errorMessage]
+            }
+        }
+
+        return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors.map { $0.1})
     }
 }
 

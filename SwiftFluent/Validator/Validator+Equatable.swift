@@ -22,7 +22,7 @@ extension Validator where Model: Equatable {
     @discardableResult
     public func notEqual(to value: Model, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: {errorMessage},
+            errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0 != value }
         )
         addRule(rule)
@@ -43,7 +43,7 @@ extension Validator where Model: Equatable {
     @discardableResult
     public func equal(to value: Model, errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: {errorMessage},
+            errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0 == value }
         )
         addRule(rule)

@@ -29,7 +29,7 @@ extension Validator where Model: OptionalType  {
     @discardableResult
     public func notNil(errorMessage: String) -> Validator<Model> {
         let rule = ValidationRule<Model>(
-            errorMessage: {errorMessage},
+            errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.isPresent }
         )
         addRule(rule)
