@@ -41,10 +41,6 @@ public class Validator<Model> {
 
     public init() { }
 
-    public init(validationRules: [ValidationRule<Model>]) {
-        self.validationRules = validationRules
-    }
-
     func addRule(_ rule: ValidationRule<Model>) {
         validationRules.append(rule)
     }
@@ -96,8 +92,10 @@ extension Validator {
      - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
      */
     @discardableResult
-    public func validate(_ condition: @escaping (Model) -> Bool, errorMessage: String) -> Validator<Model> {
+    public func validate(_ condition: @escaping (Model) -> Bool, errorMessage: String? = nil) -> Validator<Model> {
+        let error = errorMessage ?? "Validation failed."
         let rule = ValidationRule<Model>(
+            errorMessage: { (String(describing: Model.self), error) },
             isValid: condition
         )
         addRule(rule)
