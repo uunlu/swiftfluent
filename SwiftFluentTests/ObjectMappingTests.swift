@@ -532,6 +532,31 @@ final class ObjectMappingTests: XCTestCase {
         )
     }
 
+    func testObjectValidationMapErrorsForKey_onIsValidFalse() throws {
+        let user = makeSUT(name: "name")
+
+        let validator = Validator<User>()
+            .ruleFor(\.name)
+            .minLength(5)
+            .equal("another name")
+            .ruleFor(\.email)
+            .minLength(25)
+            .build()
+
+        let result = validator.validate(user)
+        let nameErrors = validator.errorFor(keyPath: \.name)
+        let expectedErrorsForName = [
+            "The length of ‘name’ must be 5 characters or more.",
+            "‘name’ should be equal to another name."
+        ]
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(
+            validator.validationsMap["name"],
+            expectedErrorsForName
+        )
+        XCTAssertEqual(nameErrors, expectedErrorsForName)
+    }
+
     private func makeSUT(
         name: String = "a name",
         age: Int = 20,

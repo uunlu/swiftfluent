@@ -47,15 +47,15 @@ public class Validator<Model> {
 
     public func validate(_ model: Model) -> ValidationResult {
         let invalidErrors = validationRules
-                    .filter { !$0.isValid(model) }
-                    .compactMap { $0.errorMessage } // Filter out nil errorMessage
-                    .map { errorMessage -> (String, String) in // Use a default message if errorMessage is nil
-                        if !errorMessage().1.isEmpty {
-                            return errorMessage()
-                        } else {
-                            return ("", "Validation failed.")
-                        }
-                    }
+            .filter { !$0.isValid(model) }
+            .compactMap { $0.errorMessage } // Filter out nil errorMessage
+            .map { errorMessage -> (String, String) in // Use a default message if errorMessage is nil
+                if !errorMessage().1.isEmpty {
+                    return errorMessage()
+                } else {
+                    return ("", "Validation failed.")
+                }
+            }
 
         validationErrors = invalidErrors.map { $0.1}
 
@@ -69,6 +69,10 @@ public class Validator<Model> {
         }
 
         return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors.map { $0.1})
+    }
+
+    public func errorFor<Value>(keyPath: KeyPath<Model, Value>) -> [String]? {
+        validationsMap[keyPath.propertyName]
     }
 }
 
