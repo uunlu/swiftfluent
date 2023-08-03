@@ -16,6 +16,7 @@ public struct RuleForBuilder<Model, Value> {
         self.validator = validator
     }
 
+    @discardableResult
     public func build() -> Validator<Model> {
         return validator
     }

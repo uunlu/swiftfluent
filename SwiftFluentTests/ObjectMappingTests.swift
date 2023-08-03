@@ -524,7 +524,7 @@ final class ObjectMappingTests: XCTestCase {
         let result = validator.validate(user)
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(
-            validator.validationsMap["name"],
+            validator.validationErrorsMap["name"],
             [
                 "The length of ‘name’ must be 5 characters or more.",
                 "‘name’ should be equal to another name."
@@ -551,7 +551,7 @@ final class ObjectMappingTests: XCTestCase {
         ]
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(
-            validator.validationsMap["name"],
+            validator.validationErrorsMap["name"],
             expectedErrorsForName
         )
         XCTAssertEqual(nameErrors, expectedErrorsForName)

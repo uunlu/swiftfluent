@@ -37,7 +37,7 @@ public enum ValidationResult {
 public class Validator<Model> {
     private var validationRules: [ValidationRule<Model>] = []
     private(set) public var validationErrors: [String] = []
-    private(set) public var validationsMap: [String: [String]] = [:]
+    private(set) public var validationErrorsMap: [String: [String]] = [:]
 
     public init() { }
 
@@ -60,19 +60,43 @@ public class Validator<Model> {
         validationErrors = invalidErrors.map { $0.1}
 
         for (propertyKey, errorMessage) in invalidErrors {
-            if var errors = validationsMap[propertyKey] {
+            if var errors = validationErrorsMap[propertyKey] {
                 errors.append(errorMessage)
-                validationsMap[propertyKey] = errors
+                validationErrorsMap[propertyKey] = errors
             } else {
-                validationsMap[propertyKey] = [errorMessage]
+                validationErrorsMap[propertyKey] = [errorMessage]
             }
         }
 
         return invalidErrors.isEmpty ? .valid : .invalid(errors: invalidErrors.map { $0.1})
     }
 
+    /// Retrieves the validation error messages for a given property in the model.
+    ///
+    /// - Parameter keyPath: The key path representing the property in the model.
+    /// - Returns: An array of validation error messages for the specified property, or nil if there are no validation errors for the property.
     public func errorFor<Value>(keyPath: KeyPath<Model, Value>) -> [String]? {
-        validationsMap[keyPath.propertyName]
+        let errors = validationErrorsMap[keyPath.propertyName]
+
+        return errors
+    }
+
+    /// Retrieves the validation error messages for a given property in the model and updates the provided `errorMessage` with the first error message, if any.
+    /// This method is used to get the error message associated with a specific property and update an `inout` `errorMessage` parameter for easy access to the error message.
+    ///
+    /// - Parameters:
+    ///   - keyPath: The key path representing the property in the model.
+    ///   - errorMessage: A reference to a string that will be updated with the first validation error message, if any. If no errors are found, it will be set to an empty string.
+    /// - Returns: The Validator instance for further chaining of validation rules.
+    @discardableResult
+    public func errorFor<Value>(keyPath: KeyPath<Model, Value>, errorMessage: inout String) -> Validator<Model>{
+        guard let errors = validationErrorsMap[keyPath.propertyName] else {
+            errorMessage = ""
+            return self
+        }
+        errorMessage = errors.first ?? ""
+
+        return self
     }
 }
 
@@ -80,15 +104,15 @@ public class Validator<Model> {
 
 extension Validator {
     /**
-    Adds a validation rule to the Validator for the specified condition.
+     Adds a validation rule to the Validator for the specified condition.
 
-    Use this method to add a custom validation rule to the Validator. The `condition` closure takes a `Model` as input and returns a `Bool`, indicating whether the validation rule is satisfied or not. If the `condition` returns `true`, the validation passes; otherwise, it fails.
+     Use this method to add a custom validation rule to the Validator. The `condition` closure takes a `Model` as input and returns a `Bool`, indicating whether the validation rule is satisfied or not. If the `condition` returns `true`, the validation passes; otherwise, it fails.
 
-    - Parameter condition: A closure that defines the validation rule. It takes a `Model` as input and returns a `Bool` indicating whether the validation rule is satisfied.
-    - Parameter errorMessage: The error message to display if the validation fails.
-    - Returns: The Validator instance with the new validation rule added.
+     - Parameter condition: A closure that defines the validation rule. It takes a `Model` as input and returns a `Bool` indicating whether the validation rule is satisfied.
+     - Parameter errorMessage: The error message to display if the validation fails.
+     - Returns: The Validator instance with the new validation rule added.
 
-    Example usage:
+     Example usage:
      ```
      let validator = Validator<String>()
      .validate({ !$0.isEmpty }, errorMessage: "Input should not be an empty string.")
