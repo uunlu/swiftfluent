@@ -22,7 +22,8 @@ extension Validator where Model: Comparable {
      - Remark: This method checks if the model's value is less than the provided `value`. The validation will pass if the model's value is indeed less than `value`.
      */
     @discardableResult
-    public func lessThan(_ value: Model, errorMessage: String) -> Validator<Model> {
+    public func lessThan(_ value: Model, errorMessage: String?=nil) -> Validator<Model> {
+        let errorMessage = errorMessage ?? defaultErrorMessage
         let rule = ValidationRule<Model>(
             errorMessage: { (String(describing: Model.self) ,errorMessage) },
             isValid: { $0 < value }
@@ -45,7 +46,8 @@ extension Validator where Model: Comparable {
      - Remark: This method checks if the model's value is less than or equal to the provided `value`. The validation will pass if the model's value is less than or equal to `value`.
      */
     @discardableResult
-    public func lessThanOrEqualTo(_ value: Model, errorMessage: String) -> Validator<Model> {
+    public func lessThanOrEqualTo(_ value: Model, errorMessage: String?=nil) -> Validator<Model> {
+        let errorMessage = errorMessage ?? defaultErrorMessage
         let rule = ValidationRule<Model>(
             errorMessage: { ( String(describing: Model.self), errorMessage) },
             isValid: { $0 <= value }
@@ -68,7 +70,8 @@ extension Validator where Model: Comparable {
      - Remark: This method checks if the model's value is greater than the provided `value`. The validation will pass if the model's value is indeed greater than `value`.
      */
     @discardableResult
-    public func greaterThan(_ value: Model, errorMessage: String) -> Validator<Model> {
+    public func greaterThan(_ value: Model, errorMessage: String?=nil) -> Validator<Model> {
+        let errorMessage = errorMessage ?? defaultErrorMessage
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0 > value }
@@ -91,7 +94,8 @@ extension Validator where Model: Comparable {
      - Remark: This method checks if the model's value is greater than or equal to the provided `value`. The validation will pass if the model's value is greater than or equal to `value`.
      */
     @discardableResult
-    public func greaterThanOrEqualTo(_ value: Model, errorMessage: String) -> Validator<Model> {
+    public func greaterThanOrEqualTo(_ value: Model, errorMessage: String?) -> Validator<Model> {
+        let errorMessage = errorMessage ?? defaultErrorMessage
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0 >= value }
