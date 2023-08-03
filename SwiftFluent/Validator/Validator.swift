@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct ValidationRule<Model> {
-    public var errorMessage: () -> (String, String)
-    public let isValid: (Model) -> Bool
+struct ValidationRule<Model> {
+    var errorMessage: () -> (String, String)
+    let isValid: (Model) -> Bool
 
     init(errorMessage: @escaping () -> (String, String), isValid: @escaping (Model) -> Bool) {
         self.errorMessage = errorMessage
