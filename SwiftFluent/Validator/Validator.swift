@@ -7,42 +7,16 @@
 
 import Foundation
 
-struct ValidationRule<Model> {
-    var errorMessage: () -> (String, String)
-    let isValid: (Model) -> Bool
-
-    init(errorMessage: @escaping () -> (String, String), isValid: @escaping (Model) -> Bool) {
-        self.errorMessage = errorMessage
-        self.isValid = isValid
-    }
-
-    init(isValid: @escaping (Model) -> Bool) {
-        self.errorMessage = { ("", "") }
-        self.isValid = isValid
-    }
-}
-
-public enum ValidationResult {
-    case valid
-    case invalid(errors: [String])
-
-    public var isValid: Bool {
-        if case .valid = self {
-            return true
-        }
-        return false
-    }
-}
-
 public class Validator<Model> {
     private var validationRules: [ValidationRule<Model>] = []
     private(set) public var validationErrors: [String] = []
     private(set) public var validationErrorsMap: [String: [String]] = [:]
+
     let defaultErrorMessage = "Invalid result"
 
     public init() { }
 
-    func addRule(_ rule: ValidationRule<Model>) {
+    internal func addRule(_ rule: ValidationRule<Model>) {
         validationRules.append(rule)
     }
 
@@ -54,7 +28,7 @@ public class Validator<Model> {
                 if !errorMessage().1.isEmpty {
                     return errorMessage()
                 } else {
-                    return ("", "Validation failed.")
+                    return ("", defaultErrorMessage)
                 }
             }
 
@@ -99,11 +73,36 @@ public class Validator<Model> {
 
         return self
     }
+
+    /**
+     Creates a validation rule for a specific property of the model.
+
+     - Parameter keyPath: The key path of the property to validate.
+     - Returns: An instance of `RuleForBuilder` that allows chaining validation rules for the specified property.
+
+     Example usage:
+     ```
+     let validator = Validator<User>()
+     .ruleFor(\.name)
+     .notEmpty()
+     .maxLength(50)
+     .build()
+     ```
+
+     The `ruleFor` method is used to define validation rules for a particular property of the model. It returns a `RuleForBuilder` instance that allows you to chain multiple validation rules for the same property. Each rule can be specified using methods like `notEmpty`, `maxLength`, `email`, etc.
+
+     The `@discardableResult` attribute is used to suppress the compiler warning when the return value of this method is not used. However, it is recommended to capture the returned `RuleForBuilder` instance to ensure all validation rules are added to the validator.
+     */
+    @discardableResult
+    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>) -> RuleForBuilder<Model, Value> {
+        return RuleForBuilder(keyPath: keyPath, validator: self)
+    }
 }
 
 // MARK: - Custom validator extension
 
 extension Validator {
+
     /**
      Adds a validation rule to the Validator for the specified condition.
 
@@ -129,12 +128,5 @@ extension Validator {
         )
         addRule(rule)
         return self
-    }
-}
-
-public extension Validator {
-    @discardableResult
-    func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>) -> RuleForBuilder<Model, Value> {
-        return RuleForBuilder(keyPath: keyPath, validator: self)
     }
 }

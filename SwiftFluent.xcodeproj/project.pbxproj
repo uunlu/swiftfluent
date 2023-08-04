@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		609C3E6D2A7CF21C00F0A4CC /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */; };
+		609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */; };
 		60A9494B2A77CED0001D17A9 /* SwiftFluent.docc in Sources */ = {isa = PBXBuildFile; fileRef = 60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */; };
 		60A949512A77CED0001D17A9 /* SwiftFluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A949462A77CED0001D17A9 /* SwiftFluent.framework */; };
 		60A949562A77CED0001D17A9 /* SwiftFluentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
+		609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
 		60A949462A77CED0001D17A9 /* SwiftFluent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFluent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A949492A77CED0001D17A9 /* SwiftFluent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFluent.h; sourceTree = "<group>"; };
 		60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SwiftFluent.docc; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				60A949612A77CF27001D17A9 /* Validator.swift */,
+				609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */,
+				609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */,
 				60DB78062A781D80005D539A /* Validator+Equatable.swift */,
 				60DB78042A78196A005D539A /* Validator+OptionalType.swift */,
 				60DB78082A78303A005D539A /* Validator+String.swift */,
@@ -262,12 +268,14 @@
 			files = (
 				60DB78092A78303B005D539A /* Validator+String.swift in Sources */,
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
+				609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */,
 				60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */,
 				60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */,
 				60DB784E2A7A8330005D539A /* RuleForBuilder+Equatable.swift in Sources */,
 				60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */,
 				60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */,
 				60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */,
+				609C3E6D2A7CF21C00F0A4CC /* ValidationResult.swift in Sources */,
 				60DB780D2A786133005D539A /* CreditCardValidator.swift in Sources */,
 				60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */,
 				60DB78432A7944E0005D539A /* RuleForBuilder.swift in Sources */,
