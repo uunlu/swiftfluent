@@ -21,7 +21,13 @@ public struct RuleForBuilder<Model, Value> {
         return validator
     }
 
-    public func validate(_ errorMessage: String = "", condition: @escaping (Value) -> Bool) -> RuleForBuilder<Model, Value> {
+    /// Adds a validation rule to the builder for the specified property.
+    ///
+    /// - Parameters:
+    ///   - errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+    ///   - condition: The condition that must be satisfied for the validation to pass.
+    /// - Returns: The RuleForBuilder instance with the validation rule added.
+    public func validate(_ errorMessage: String, condition: @escaping (Value) -> Bool) -> RuleForBuilder<Model, Value> {
         let rule = ValidationRule<Model>(errorMessage: {(keyPath.propertyName, errorMessage)}) { model in
             let value = model[keyPath: keyPath]
             return condition(value)
