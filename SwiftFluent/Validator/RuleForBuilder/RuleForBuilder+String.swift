@@ -214,10 +214,11 @@ public extension RuleForBuilder where Value == String {
 public extension RuleForBuilder where Value == String {
 
     /**
-     Adds a validation rule to check if the property value is a valid email address.
+     Adds an email validation rule to the builder for the specified property.
 
-     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
-     - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
+     - Parameter customRegex: An optional regular expression to customize email validation.
+     - Parameter errorMessage: An optional custom error message to display if validation fails.
+     - Returns: The `RuleForBuilder` instance with the email validation rule added.
 
      Example usage:
      ```
@@ -229,16 +230,17 @@ public extension RuleForBuilder where Value == String {
      ```
      - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ is not a valid email address.". The actual property name will be dynamically inserted into the error message.
      */
-    func email(errorMessage: String? = nil) -> RuleForBuilder<Model, Value> {
-        buildEmail(errorMessage: errorMessage)
+    func email(_ customRegex: String?=nil, errorMessage: String? = nil) -> RuleForBuilder<Model, Value> {
+        buildEmail(customRegex, errorMessage: errorMessage)
         return self
     }
 
     /**
-     Adds a validation rule to check if the property value is a valid email address.
+     Adds an email validation rule to the validator for the specified property.
 
-     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
-     - Returns: The `Validator` instance to allow further rule definitions for different properties.
+     - Parameter customRegex: An optional regular expression to customize email validation.
+     - Parameter errorMessage: An optional custom error message to display if validation fails.
+     - Returns: The `Validator` instance with the email validation rule added.
 
      Example usage:
      ```
@@ -250,28 +252,21 @@ public extension RuleForBuilder where Value == String {
      ```
      - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ is not a valid email address.". The actual property name will be dynamically inserted into the error message.
      */
-    func email(errorMessage: String? = nil) -> Validator<Model> {
-        buildEmail(errorMessage: errorMessage)
+    func email(customRegex: String?=nil, errorMessage: String? = nil) -> Validator<Model> {
+        buildEmail(customRegex, errorMessage: errorMessage)
         return validator
     }
 
-    fileprivate func buildEmail(errorMessage: String?) {
+    fileprivate func buildEmail(_ customRegex: String?=nil, errorMessage: String?) {
         let defaultMessage = (keyPath.propertyName, errorMessage ??
-        "'\(keyPath.propertyName)' is not a valid email address.")
+                              "'\(keyPath.propertyName)' is not a valid email address.")
 
         let rule = ValidationRule<Model>(errorMessage:{defaultMessage}) { model in
             let value = model[keyPath: keyPath]
-            return validateEmail(value)
+            return value.isValidEmail(customRegex: customRegex)
         }
 
         validator.addRule(rule)
-    }
-
-    private func validateEmail(_ email: String, regex: String? = nil) -> Bool {
-        let emailRegex = regex ?? "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-
-        return emailPredicate.evaluate(with: email)
     }
 }
 

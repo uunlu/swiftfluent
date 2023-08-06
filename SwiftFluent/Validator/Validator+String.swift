@@ -19,11 +19,11 @@ extension Validator where Model == String{
      - Returns: The Validator instance with the new email validation rule added.
      */
     @discardableResult
-    public func email(errorMessage: String?=nil) -> Validator<Model> {
+    public func email(customRegex: String?=nil, errorMessage: String?=nil) -> Validator<Model> {
         let errorMessage = errorMessage ?? defaultErrorMessage
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
-            isValid: { $0.isValidEmail() }
+            isValid: { $0.isValidEmail(customRegex: customRegex) }
         )
         addRule(rule)
         return self
@@ -191,11 +191,10 @@ extension Validator where Model == String{
 // MARK: - String extensions
 
 internal extension String {
-    func isValidEmail() -> Bool {
-        // Regular expression pattern to match email addresses
-        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-
+    func isValidEmail(customRegex: String? = nil) -> Bool {
+        let emailRegex = customRegex ?? "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+
         return emailPredicate.evaluate(with: self)
     }
 
