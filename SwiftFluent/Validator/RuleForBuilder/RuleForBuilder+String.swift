@@ -66,7 +66,8 @@ public extension RuleForBuilder where Value == String {
     }
 
     fileprivate func buildLength(_ min: Int, max: Int, errorMessage: String?) {
-        let error = (keyPath.propertyName, errorMessage ?? "The length of ‘\(keyPath.propertyName)’ must be between \(min) and \(max) characters.")
+        let errorMessage = errorMessage ?? ErrorMessage.lengthError(name: keyPath.propertyName, min: min, max: max).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
 
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
@@ -132,7 +133,8 @@ public extension RuleForBuilder where Value == String {
     }
 
     fileprivate func buildMaxLength(_ max: Int, errorMessage: String?) {
-        let error = (keyPath.propertyName, errorMessage ?? "The length of ‘\(keyPath.propertyName)’ must be \(max) characters or fewer.")
+        let errorMessage = errorMessage ?? ErrorMessage.maxLengthError(name: keyPath.propertyName, max: max).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
 
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
@@ -198,7 +200,8 @@ public extension RuleForBuilder where Value == String {
     }
 
     fileprivate func buildMinLength(_ min: Int, errorMessage: String?) {
-        let error = (keyPath.propertyName, errorMessage ?? "The length of ‘\(keyPath.propertyName)’ must be \(min) characters or more.")
+        let errorMessage = errorMessage ?? ErrorMessage.minLengthError(name: keyPath.propertyName, min: min).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
 
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
@@ -257,9 +260,9 @@ public extension RuleForBuilder where Value == String {
         return validator
     }
 
-    fileprivate func buildEmail(_ customRegex: String?=nil, errorMessage: String?) {
-        let defaultMessage = (keyPath.propertyName, errorMessage ??
-                              "'\(keyPath.propertyName)' is not a valid email address.")
+    fileprivate func buildEmail(_ customRegex: String?, errorMessage: String?) {
+        let error = errorMessage ?? ErrorMessage.email(name: keyPath.propertyName).errorDescription
+        let defaultMessage = (keyPath.propertyName, error)
 
         let rule = ValidationRule<Model>(errorMessage:{defaultMessage}) { model in
             let value = model[keyPath: keyPath]
@@ -312,13 +315,13 @@ public extension RuleForBuilder where Value == String {
         buildCreditCard(errorMessage)
         return validator
     }
-
+    
     private func buildCreditCard(_ errorMessage: String?) {
-        let defaultMessage = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)‘ is not a valid credit card number.")
+        let errorMessage = errorMessage ?? ErrorMessage.creditCard(name: keyPath.propertyName).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
 
-        let rule = ValidationRule<Model>(errorMessage: {defaultMessage}) { model in
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
-
             return CreditCardValidator.isValid(value)
         }
 

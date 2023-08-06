@@ -56,11 +56,12 @@ public extension RuleForBuilder where Value: Comparable {
         return validator
     }
 
-    fileprivate func buildLessthan(_ errorMessage: String?, _ maxValue: Value) {
-        let error = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)’ must be less than \(maxValue).")
+    fileprivate func buildLessthan(_ errorMessage: String?, _ max: Value) {
+        let errorMessage = errorMessage ??  ErrorMessage.lessThanError(name: keyPath.propertyName, max: String(describing: max)).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
-            return propertyValue < maxValue
+            return propertyValue < max
         }
         validator.addRule(rule)
     }
@@ -114,11 +115,12 @@ public extension RuleForBuilder where Value: Comparable {
         return validator
     }
 
-    fileprivate func buildLessThanOrEqualTo(_ errorMessage: String?, _ maxValue: Value) {
-        let error = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)’ must be less than or equal to \(maxValue).")
+    fileprivate func buildLessThanOrEqualTo(_ errorMessage: String?, _ max: Value) {
+        let errorMessage = errorMessage ?? ErrorMessage.lessThanOrEqualToError(name: keyPath.propertyName, max: String(describing: max)).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
-            return propertyValue <= maxValue
+            return propertyValue <= max
         }
         validator.addRule(rule)
     }
@@ -171,11 +173,12 @@ public extension RuleForBuilder where Value: Comparable {
         return validator
     }
 
-    fileprivate func buildGreaterthan(_ errorMessage: String?, _ minValue: Value) {
-        let error = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)’ must be greater than \(minValue).")
+    fileprivate func buildGreaterthan(_ errorMessage: String?, _ min: Value) {
+        let errorMessage = errorMessage ?? ErrorMessage.greaterThanError(name: keyPath.propertyName, min: String(describing: min)).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
-            return propertyValue > minValue
+            return propertyValue > min
         }
         validator.addRule(rule)
     }
@@ -229,11 +232,12 @@ public extension RuleForBuilder where Value: Comparable {
         return validator
     }
 
-    fileprivate func buildgreaterThanOrEqualTo(_ errorMessage: String?, _ minValue: Value) {
-        let error = (keyPath.propertyName, errorMessage ?? "‘\(keyPath.propertyName)’ must be greater than or equal to \(minValue).")
+    fileprivate func buildgreaterThanOrEqualTo(_ errorMessage: String?, _ min: Value) {
+        let errorMessage = errorMessage ?? ErrorMessage.greaterThanOrEqualToError(name: keyPath.propertyName, min: String(describing: min)).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
-            return propertyValue >= minValue
+            return propertyValue >= min
         }
         validator.addRule(rule)
     }

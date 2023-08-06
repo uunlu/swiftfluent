@@ -20,6 +20,7 @@ public class Validator<Model> {
         validationRules.append(rule)
     }
 
+    @discardableResult
     public func validate(_ model: Model) -> ValidationResult {
         let invalidErrors = validationRules
             .filter { !$0.isValid(model) }

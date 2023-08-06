@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		609C3E6D2A7CF21C00F0A4CC /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */; };
 		609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */; };
+		609C3E772A80357400F0A4CC /* RuleForBuilderErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */; };
+		609C3E792A80364D00F0A4CC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E782A80364D00F0A4CC /* Utilities.swift */; };
 		60A9494B2A77CED0001D17A9 /* SwiftFluent.docc in Sources */ = {isa = PBXBuildFile; fileRef = 60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */; };
 		60A949512A77CED0001D17A9 /* SwiftFluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60A949462A77CED0001D17A9 /* SwiftFluent.framework */; };
 		60A949562A77CED0001D17A9 /* SwiftFluentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
 		609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
+		609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleForBuilderErrorTests.swift; sourceTree = "<group>"; };
+		609C3E782A80364D00F0A4CC /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		60A949462A77CED0001D17A9 /* SwiftFluent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFluent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A949492A77CED0001D17A9 /* SwiftFluent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFluent.h; sourceTree = "<group>"; };
 		60A9494A2A77CED0001D17A9 /* SwiftFluent.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SwiftFluent.docc; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			children = (
 				60A949552A77CED0001D17A9 /* SwiftFluentTests.swift */,
 				60DB783F2A791A89005D539A /* ObjectMappingTests.swift */,
+				609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */,
+				609C3E782A80364D00F0A4CC /* Utilities.swift */,
 			);
 			path = SwiftFluentTests;
 			sourceTree = "<group>";
@@ -290,6 +296,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A949562A77CED0001D17A9 /* SwiftFluentTests.swift in Sources */,
+				609C3E772A80357400F0A4CC /* RuleForBuilderErrorTests.swift in Sources */,
+				609C3E792A80364D00F0A4CC /* Utilities.swift in Sources */,
 				60DB78402A791A89005D539A /* ObjectMappingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

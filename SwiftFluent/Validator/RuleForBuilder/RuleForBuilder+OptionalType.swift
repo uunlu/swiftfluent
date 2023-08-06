@@ -54,8 +54,9 @@ public extension RuleForBuilder where Value: OptionalType  {
     }
 
     fileprivate func buildNotNil(_ errorMessage: String?) {
-        let error = errorMessage ?? "‘\(keyPath.propertyName)’ must not be not nil."
-        let rule = ValidationRule<Model>(errorMessage: {(keyPath.propertyName, error)}) { model in
+        let errorMessage = errorMessage ?? ErrorMessage.notNilError(name: keyPath.propertyName).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
+        let rule = ValidationRule<Model>(errorMessage: { error}) { model in
             let propertyValue = model[keyPath: keyPath]
             return propertyValue.isPresent
         }

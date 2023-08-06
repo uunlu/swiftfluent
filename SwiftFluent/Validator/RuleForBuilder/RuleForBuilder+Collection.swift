@@ -54,8 +54,9 @@ public extension RuleForBuilder where Value: Collection  {
     }
 
     fileprivate func buildNotEmpty(_ errorMessage: String?) {
-        let error = errorMessage ?? "‘\(keyPath.propertyName)’ should not be empty."
-        let rule = ValidationRule<Model>(errorMessage: {(keyPath.propertyName, error)}) { model in
+        let errorMessage = errorMessage ?? ErrorMessage.notEmptyError(name: keyPath.propertyName).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let propertyValue = model[keyPath: keyPath]
             return propertyValue.isEmpty == false
         }
