@@ -60,7 +60,7 @@ extension Validator where Model == String{
         let errorMessage = errorMessage ?? ErrorMessage.number(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
-            isValid: { $0.containsOnlyNumbers() }
+            isValid: { $0.isNumber() }
         )
         addRule(rule)
         return self
@@ -199,9 +199,10 @@ internal extension String {
         return emailPredicate.evaluate(with: self)
     }
 
-    func containsOnlyNumbers() -> Bool {
-        let numbersSet = CharacterSet.decimalDigits
-        return self.rangeOfCharacter(from: numbersSet.inverted) == nil
+    func isNumber() -> Bool {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale.current
+        return numberFormatter.number(from: self) != nil
     }
 }
 

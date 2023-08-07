@@ -558,6 +558,40 @@ final class ObjectMappingTests: XCTestCase {
         )
         XCTAssertEqual(nameErrors, expectedErrorsForName)
     }
+
+    func testObjectNumber_onIsValidFalse() throws {
+        let user = makeSUT(creditCardNumber: "12121a")
+
+        let validator = Validator<User>()
+            .ruleFor(\.creditCardNumber)
+            .number()
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 1)
+        XCTAssertEqual(validator.validationErrors.first, "‘creditCardNumber‘ is not a valid number.")
+    }
+
+    func testObjectNumber_onIsValidTrue() throws {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale.current
+        let decimalNumber: Decimal = 1213231/100
+        let numberString = numberFormatter.string(for: decimalNumber) ?? ""
+        
+        let user = makeSUT(creditCardNumber: numberString)
+
+        let validator = Validator<User>()
+            .ruleFor(\.creditCardNumber)
+            .number()
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertTrue(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 0)
+    }
 }
 
 

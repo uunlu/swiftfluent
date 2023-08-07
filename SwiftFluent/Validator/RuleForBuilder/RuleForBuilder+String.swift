@@ -315,7 +315,7 @@ public extension RuleForBuilder where Value == String {
         buildCreditCard(errorMessage)
         return validator
     }
-    
+
     private func buildCreditCard(_ errorMessage: String?) {
         let errorMessage = errorMessage ?? ErrorMessage.creditCard(name: keyPath.propertyName).errorDescription
         let error = (keyPath.propertyName, errorMessage)
@@ -323,6 +323,70 @@ public extension RuleForBuilder where Value == String {
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
             return CreditCardValidator.isValid(value)
+        }
+
+        validator.addRule(rule)
+    }
+}
+
+// MARK: - number
+
+public extension RuleForBuilder where Value == String {
+
+    /**
+     Adds a validation rule to check if the value of the property is a valid number.
+
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `RuleForBuilder` instance to allow method chaining for further rule definitions.
+
+     Example usage:
+     ```
+     let validator = Validator<User>()
+     .ruleFor(.age)
+     .number(errorMessage: "Age must be a valid number.")
+     .ruleFor(.salary)
+     .number() // Uses the default error message.
+     ```
+     - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ must be a valid number." where `keyPath.propertyName` represents the name of the property being validated.
+     */
+    func number(
+        errorMessage: String? = nil
+    ) -> RuleForBuilder<Model, Value> {
+        buildNumber(errorMessage: errorMessage)
+        return self
+    }
+
+    /**
+     Adds a validation rule to check if the value of the property is a valid number.
+
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `Validator` instance to allow further rule definitions for different properties.
+
+     Example usage:
+     ```
+     let validator = Validator<User>()
+     .ruleFor(.age)
+     .number(errorMessage: "Age must be a valid number.")
+     .ruleFor(.salary)
+     .number() // Uses the default error message.
+     ```
+     - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ must be a valid number." where `keyPath.propertyName` represents the name of the property being validated.
+     */
+
+    func number(
+        errorMessage: String? = nil
+    ) -> Validator<Model> {
+        buildNumber(errorMessage: errorMessage)
+        return validator
+    }
+
+    fileprivate func buildNumber(errorMessage: String?) {
+        let errorMessage = errorMessage ?? ErrorMessage.number(name: keyPath.propertyName).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
+
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
+            let value = model[keyPath: keyPath]
+            return value.isNumber()
         }
 
         validator.addRule(rule)

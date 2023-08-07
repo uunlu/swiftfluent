@@ -58,7 +58,6 @@ enum ErrorMessage: Error, LocalizedError {
                 return NSLocalizedString("‘\(name)’ should be equal to \(value).", comment: "")
             case .notEqualError(let name, let value):
                 return NSLocalizedString("‘\(name)’ should not be equal to \(value).", comment: "")
-
         }
     }
 }
