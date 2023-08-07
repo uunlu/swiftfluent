@@ -27,6 +27,7 @@ enum ErrorMessage: Error, LocalizedError {
     // Extension Equatable
     case equalError(name: String, value: String)
     case notEqualError(name: String, value: String)
+    case defaultError
 
     var errorDescription: String {
         switch self {
@@ -58,6 +59,8 @@ enum ErrorMessage: Error, LocalizedError {
                 return NSLocalizedString("‘\(name)’ should be equal to \(value).", comment: "")
             case .notEqualError(let name, let value):
                 return NSLocalizedString("‘\(name)’ should not be equal to \(value).", comment: "")
+            case .defaultError:
+                return NSLocalizedString("Invalid property", comment: "")
         }
     }
 }

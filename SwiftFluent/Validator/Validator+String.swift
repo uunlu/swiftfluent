@@ -165,25 +165,3 @@ extension Validator where Model == String{
     }
 }
 
-// MARK: - String extensions
-
-internal extension String {
-    func isValidEmail(customRegex: String? = nil) -> Bool {
-        let emailRegex = customRegex ?? "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-
-        return emailPredicate.evaluate(with: self)
-    }
-
-    func isNumber() -> Bool {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.locale = Locale.current
-        return numberFormatter.number(from: self) != nil
-    }
-}
-
-fileprivate extension String {
-    func isNotEmpty() -> Bool {
-        self.isEmpty == false && self.trimmingCharacters(in: .whitespaces).isEmpty == false
-    }
-}

@@ -79,7 +79,7 @@ public class Validator<Model> {
      Creates a validation rule for a specific property of the model.
 
      - Parameter keyPath: The key path of the property to validate.
-     - Returns: An instance of `RuleForBuilder` that allows chaining validation rules for the specified property.
+     - Returns: An instance of `ValidationRuleBuilder` that allows chaining validation rules for the specified property.
 
      Example usage:
      ```
@@ -90,13 +90,13 @@ public class Validator<Model> {
      .build()
      ```
 
-     The `ruleFor` method is used to define validation rules for a particular property of the model. It returns a `RuleForBuilder` instance that allows you to chain multiple validation rules for the same property. Each rule can be specified using methods like `notEmpty`, `maxLength`, `email`, etc.
+     The `ruleFor` method is used to define validation rules for a particular property of the model. It returns a `ValidationRuleBuilder` instance that allows you to chain multiple validation rules for the same property. Each rule can be specified using methods like `notEmpty`, `maxLength`, `email`, etc.
 
-     The `@discardableResult` attribute is used to suppress the compiler warning when the return value of this method is not used. However, it is recommended to capture the returned `RuleForBuilder` instance to ensure all validation rules are added to the validator.
+     The `@discardableResult` attribute is used to suppress the compiler warning when the return value of this method is not used. However, it is recommended to capture the returned `ValidationRuleBuilder` instance to ensure all validation rules are added to the validator.
      */
     @discardableResult
-    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>) -> RuleForBuilder<Model, Value> {
-        return RuleForBuilder(keyPath: keyPath, validator: self)
+    public func ruleFor<Value>(_ keyPath: KeyPath<Model, Value>) -> ValidationRuleBuilder<Model, Value> {
+        return ValidationRuleBuilder(keyPath: keyPath, validator: self)
     }
 }
 

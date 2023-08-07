@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		605B842F2A80F5AA00A2E2D4 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B842E2A80F5AA00A2E2D4 /* ErrorMessage.swift */; };
 		605B84312A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B84302A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift */; };
+		605B84352A8169F800A2E2D4 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B84342A8169F800A2E2D4 /* String+Extensions.swift */; };
 		609C3E6D2A7CF21C00F0A4CC /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */; };
 		609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */; };
 		609C3E772A80357400F0A4CC /* RuleForBuilderErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */; };
@@ -24,12 +25,12 @@
 		60DB780B2A7843A6005D539A /* Validator+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB780A2A7843A6005D539A /* Validator+Comparable.swift */; };
 		60DB780D2A786133005D539A /* CreditCardValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB780C2A786133005D539A /* CreditCardValidator.swift */; };
 		60DB78402A791A89005D539A /* ObjectMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB783F2A791A89005D539A /* ObjectMappingTests.swift */; };
-		60DB78432A7944E0005D539A /* RuleForBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78422A7944E0005D539A /* RuleForBuilder.swift */; };
-		60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78452A794717005D539A /* RuleForBuilder+String.swift */; };
-		60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */; };
-		60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */; };
-		60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */; };
-		60DB784E2A7A8330005D539A /* RuleForBuilder+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */; };
+		60DB78432A7944E0005D539A /* ValidationRuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78422A7944E0005D539A /* ValidationRuleBuilder.swift */; };
+		60DB78462A794717005D539A /* ValidationRuleBuilder+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78452A794717005D539A /* ValidationRuleBuilder+String.swift */; };
+		60DB78482A79A1A4005D539A /* ValidationRuleBuilder+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78472A79A1A4005D539A /* ValidationRuleBuilder+Comparable.swift */; };
+		60DB784A2A7A687A005D539A /* ValidationRuleBuilder+OptionalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78492A7A687A005D539A /* ValidationRuleBuilder+OptionalType.swift */; };
+		60DB784C2A7A6DED005D539A /* ValidationRuleBuilder+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784B2A7A6DED005D539A /* ValidationRuleBuilder+Collection.swift */; };
+		60DB784E2A7A8330005D539A /* ValidationRuleBuilder+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB784D2A7A8330005D539A /* ValidationRuleBuilder+Equatable.swift */; };
 		60DB78512A7ADD7D005D539A /* KeyPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB78502A7ADD7D005D539A /* KeyPath+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		605B842E2A80F5AA00A2E2D4 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		605B84302A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTypeDefaultErrorMessageTests.swift; sourceTree = "<group>"; };
+		605B84342A8169F800A2E2D4 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
 		609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
 		609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleForBuilderErrorTests.swift; sourceTree = "<group>"; };
@@ -62,12 +64,12 @@
 		60DB780A2A7843A6005D539A /* Validator+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator+Comparable.swift"; sourceTree = "<group>"; };
 		60DB780C2A786133005D539A /* CreditCardValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardValidator.swift; sourceTree = "<group>"; };
 		60DB783F2A791A89005D539A /* ObjectMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMappingTests.swift; sourceTree = "<group>"; };
-		60DB78422A7944E0005D539A /* RuleForBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleForBuilder.swift; sourceTree = "<group>"; };
-		60DB78452A794717005D539A /* RuleForBuilder+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+String.swift"; sourceTree = "<group>"; };
-		60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Comparable.swift"; sourceTree = "<group>"; };
-		60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+OptionalType.swift"; sourceTree = "<group>"; };
-		60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Collection.swift"; sourceTree = "<group>"; };
-		60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RuleForBuilder+Equatable.swift"; sourceTree = "<group>"; };
+		60DB78422A7944E0005D539A /* ValidationRuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRuleBuilder.swift; sourceTree = "<group>"; };
+		60DB78452A794717005D539A /* ValidationRuleBuilder+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationRuleBuilder+String.swift"; sourceTree = "<group>"; };
+		60DB78472A79A1A4005D539A /* ValidationRuleBuilder+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationRuleBuilder+Comparable.swift"; sourceTree = "<group>"; };
+		60DB78492A7A687A005D539A /* ValidationRuleBuilder+OptionalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationRuleBuilder+OptionalType.swift"; sourceTree = "<group>"; };
+		60DB784B2A7A6DED005D539A /* ValidationRuleBuilder+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationRuleBuilder+Collection.swift"; sourceTree = "<group>"; };
+		60DB784D2A7A8330005D539A /* ValidationRuleBuilder+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationRuleBuilder+Equatable.swift"; sourceTree = "<group>"; };
 		60DB78502A7ADD7D005D539A /* KeyPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyPath+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,29 +144,30 @@
 				60DB78082A78303A005D539A /* Validator+String.swift */,
 				60DB780A2A7843A6005D539A /* Validator+Comparable.swift */,
 				60DB780C2A786133005D539A /* CreditCardValidator.swift */,
-				60DB78442A794701005D539A /* RuleForBuilder */,
+				60DB78442A794701005D539A /* RuleBuilder */,
 				605B842E2A80F5AA00A2E2D4 /* ErrorMessage.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
 		};
-		60DB78442A794701005D539A /* RuleForBuilder */ = {
+		60DB78442A794701005D539A /* RuleBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				60DB78422A7944E0005D539A /* RuleForBuilder.swift */,
-				60DB784D2A7A8330005D539A /* RuleForBuilder+Equatable.swift */,
-				60DB78492A7A687A005D539A /* RuleForBuilder+OptionalType.swift */,
-				60DB784B2A7A6DED005D539A /* RuleForBuilder+Collection.swift */,
-				60DB78472A79A1A4005D539A /* RuleForBuilder+Comparable.swift */,
-				60DB78452A794717005D539A /* RuleForBuilder+String.swift */,
+				60DB78422A7944E0005D539A /* ValidationRuleBuilder.swift */,
+				60DB784D2A7A8330005D539A /* ValidationRuleBuilder+Equatable.swift */,
+				60DB78492A7A687A005D539A /* ValidationRuleBuilder+OptionalType.swift */,
+				60DB784B2A7A6DED005D539A /* ValidationRuleBuilder+Collection.swift */,
+				60DB78472A79A1A4005D539A /* ValidationRuleBuilder+Comparable.swift */,
+				60DB78452A794717005D539A /* ValidationRuleBuilder+String.swift */,
 			);
-			path = RuleForBuilder;
+			path = RuleBuilder;
 			sourceTree = "<group>";
 		};
 		60DB784F2A7ADD58005D539A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				60DB78502A7ADD7D005D539A /* KeyPath+Extensions.swift */,
+				605B84342A8169F800A2E2D4 /* String+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -282,16 +285,17 @@
 				605B842F2A80F5AA00A2E2D4 /* ErrorMessage.swift in Sources */,
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
 				609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */,
-				60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */,
-				60DB784A2A7A687A005D539A /* RuleForBuilder+OptionalType.swift in Sources */,
-				60DB784E2A7A8330005D539A /* RuleForBuilder+Equatable.swift in Sources */,
-				60DB78462A794717005D539A /* RuleForBuilder+String.swift in Sources */,
-				60DB78482A79A1A4005D539A /* RuleForBuilder+Comparable.swift in Sources */,
+				605B84352A8169F800A2E2D4 /* String+Extensions.swift in Sources */,
+				60DB784C2A7A6DED005D539A /* ValidationRuleBuilder+Collection.swift in Sources */,
+				60DB784A2A7A687A005D539A /* ValidationRuleBuilder+OptionalType.swift in Sources */,
+				60DB784E2A7A8330005D539A /* ValidationRuleBuilder+Equatable.swift in Sources */,
+				60DB78462A794717005D539A /* ValidationRuleBuilder+String.swift in Sources */,
+				60DB78482A79A1A4005D539A /* ValidationRuleBuilder+Comparable.swift in Sources */,
 				60DB78072A781D80005D539A /* Validator+Equatable.swift in Sources */,
 				609C3E6D2A7CF21C00F0A4CC /* ValidationResult.swift in Sources */,
 				60DB780D2A786133005D539A /* CreditCardValidator.swift in Sources */,
 				60DB78052A78196A005D539A /* Validator+OptionalType.swift in Sources */,
-				60DB78432A7944E0005D539A /* RuleForBuilder.swift in Sources */,
+				60DB78432A7944E0005D539A /* ValidationRuleBuilder.swift in Sources */,
 				60DB780B2A7843A6005D539A /* Validator+Comparable.swift in Sources */,
 				60DB78512A7ADD7D005D539A /* KeyPath+Extensions.swift in Sources */,
 				60A9494B2A77CED0001D17A9 /* SwiftFluent.docc in Sources */,

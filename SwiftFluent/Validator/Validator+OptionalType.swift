@@ -31,7 +31,7 @@ extension Validator where Model: OptionalType  {
         let errorMessage = errorMessage ?? ErrorMessage.notNilError(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
-            isValid: { $0.isPresent }
+            isValid: { $0.isNotNil }
         )
         addRule(rule)
         return self
@@ -41,13 +41,13 @@ extension Validator where Model: OptionalType  {
 // A protocol to represent optional types
 public protocol OptionalType {
     associatedtype Wrapped
-    var isPresent: Bool { get }
+    var isNotNil: Bool { get }
     var value: Wrapped? { get }
 }
 
 // Conform Optional to OptionalType
 extension Optional: OptionalType {
-    public var isPresent: Bool {
+    public var isNotNil: Bool {
         return self != nil
     }
 
