@@ -8,15 +8,15 @@
 import Foundation
 
 public class Validator<Model> {
-    private var validationRules: [ValidationRule<Model>] = []
     private(set) public var validationErrors: [String] = []
+    private var validationRules: [ValidationRule<Model>] = []
     private var validationErrorsMap: [String: [String]] = [:]
 
-    let defaultErrorMessage = "Invalid result"
+    private let defaultErrorMessage = "Invalid result"
 
     public init() { }
 
-    internal func addRule(_ rule: ValidationRule<Model>) {
+    func addRule(_ rule: ValidationRule<Model>) {
         validationRules.append(rule)
     }
 
