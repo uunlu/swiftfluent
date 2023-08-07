@@ -14,7 +14,6 @@ final class RuleForBuilderErrorTests: XCTestCase {
         let model = makeSUT(email: "")
 
         let validator = Validator<User>()
-        typealias ErrorMessage = RuleForBuilder<User, String>.ErrorMessage
 
         let result = validator
             .ruleFor(\.name)

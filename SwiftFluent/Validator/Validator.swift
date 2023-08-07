@@ -10,7 +10,7 @@ import Foundation
 public class Validator<Model> {
     private var validationRules: [ValidationRule<Model>] = []
     private(set) public var validationErrors: [String] = []
-    private(set) public var validationErrorsMap: [String: [String]] = [:]
+    private var validationErrorsMap: [String: [String]] = [:]
 
     let defaultErrorMessage = "Invalid result"
 

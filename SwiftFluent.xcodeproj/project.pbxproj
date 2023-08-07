@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605B842F2A80F5AA00A2E2D4 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B842E2A80F5AA00A2E2D4 /* ErrorMessage.swift */; };
+		605B84312A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B84302A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift */; };
 		609C3E6D2A7CF21C00F0A4CC /* ValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */; };
 		609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */; };
 		609C3E772A80357400F0A4CC /* RuleForBuilderErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		605B842E2A80F5AA00A2E2D4 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		605B84302A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTypeDefaultErrorMessageTests.swift; sourceTree = "<group>"; };
 		609C3E6C2A7CF21C00F0A4CC /* ValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResult.swift; sourceTree = "<group>"; };
 		609C3E6E2A7CF29800F0A4CC /* ValidationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
 		609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleForBuilderErrorTests.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				60DB783F2A791A89005D539A /* ObjectMappingTests.swift */,
 				609C3E762A80357400F0A4CC /* RuleForBuilderErrorTests.swift */,
 				609C3E782A80364D00F0A4CC /* Utilities.swift */,
+				605B84302A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift */,
 			);
 			path = SwiftFluentTests;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				60DB780A2A7843A6005D539A /* Validator+Comparable.swift */,
 				60DB780C2A786133005D539A /* CreditCardValidator.swift */,
 				60DB78442A794701005D539A /* RuleForBuilder */,
+				605B842E2A80F5AA00A2E2D4 /* ErrorMessage.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -273,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60DB78092A78303B005D539A /* Validator+String.swift in Sources */,
+				605B842F2A80F5AA00A2E2D4 /* ErrorMessage.swift in Sources */,
 				60A949622A77CF27001D17A9 /* Validator.swift in Sources */,
 				609C3E6F2A7CF29800F0A4CC /* ValidationRule.swift in Sources */,
 				60DB784C2A7A6DED005D539A /* RuleForBuilder+Collection.swift in Sources */,
@@ -296,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60A949562A77CED0001D17A9 /* SwiftFluentTests.swift in Sources */,
+				605B84312A80F6D800A2E2D4 /* BaseTypeDefaultErrorMessageTests.swift in Sources */,
 				609C3E772A80357400F0A4CC /* RuleForBuilderErrorTests.swift in Sources */,
 				609C3E792A80364D00F0A4CC /* Utilities.swift in Sources */,
 				60DB78402A791A89005D539A /* ObjectMappingTests.swift in Sources */,

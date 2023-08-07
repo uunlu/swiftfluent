@@ -20,7 +20,7 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func email(customRegex: String?=nil, errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+        let errorMessage = errorMessage ?? ErrorMessage.email(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.isValidEmail(customRegex: customRegex) }
