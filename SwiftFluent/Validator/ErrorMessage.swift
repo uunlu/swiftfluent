@@ -14,6 +14,7 @@ enum ErrorMessage: Error, LocalizedError {
     // Extension String
     case email(name: String)
     case creditCard(name: String)
+    case number(name: String)
     // Extension Comparable
     case lessThanError(name: String, max: String)
     case lessThanOrEqualToError(name: String, max: String)
@@ -39,6 +40,8 @@ enum ErrorMessage: Error, LocalizedError {
                 return NSLocalizedString("'\(name)' is not a valid email address.", comment: "")
             case .creditCard(let name):
                 return NSLocalizedString("‘\(name)‘ is not a valid credit card number.", comment: "")
+            case .number(let name):
+                return NSLocalizedString("‘\(name)‘ is not a valid number.", comment: "")
             case .lessThanError(let name, let max):
                 return NSLocalizedString("‘\(name)’ must be less than \(max).", comment: "")
             case .lessThanOrEqualToError(let name, let max):

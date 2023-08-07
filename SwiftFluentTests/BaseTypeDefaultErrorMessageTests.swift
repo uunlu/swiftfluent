@@ -15,13 +15,16 @@ final class BaseTypeDefaultErrorMessageTests: XCTestCase {
 
         validator
             .email()
+            .minLength(100)
 
         _ = validator.validate("some value")
 
         let emailErrorForString = ErrorMessage.email(name: "String").errorDescription
+        let minLengthErrorForString = ErrorMessage.minLengthError(name: "String", min: 100).errorDescription
 
         let expectedErrorsForStringType = [
-            emailErrorForString
+            emailErrorForString,
+            minLengthErrorForString
         ]
 
         XCTAssertEqual(validator.validationErrors, expectedErrorsForStringType)

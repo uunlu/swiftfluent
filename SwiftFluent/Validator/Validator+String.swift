@@ -57,7 +57,7 @@ extension Validator where Model == String{
 
     @discardableResult
     public func number(errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+        let errorMessage = errorMessage ?? ErrorMessage.number(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.containsOnlyNumbers() }
@@ -154,7 +154,8 @@ extension Validator where Model == String{
      - Remark: This method checks the length of the model's value against the specified `min` value. The validation will pass if the length of the model's value is greater than or equal to `min`.
      */
     @discardableResult
-    public func minLength(_ length: Int, errorMessage: String) -> Validator<Model> {
+    public func minLength(_ length: Int, errorMessage: String?=nil) -> Validator<Model> {
+        let errorMessage = errorMessage ?? ErrorMessage.minLengthError(name: String(describing: Model.self), min: length).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.count >= length }
