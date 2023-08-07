@@ -20,7 +20,7 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func email(customRegex: String?=nil, errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? ErrorMessage.email(name: String(describing: Model.self)).errorDescription
+        let errorMessage = errorMessage ?? ErrorMessage.emailError(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.isValidEmail(customRegex: customRegex) }
@@ -46,7 +46,7 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func creditCard(errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+        let errorMessage = errorMessage ?? ErrorMessage.creditCardError(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { CreditCardValidator.isValid($0) }
@@ -57,7 +57,7 @@ extension Validator where Model == String{
 
     @discardableResult
     public func number(errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? ErrorMessage.number(name: String(describing: Model.self)).errorDescription
+        let errorMessage = errorMessage ?? ErrorMessage.numberError(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.isNumber() }
@@ -82,34 +82,10 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func notEmpty(errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+        let errorMessage = errorMessage ?? ErrorMessage.notEmptyError(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.isNotEmpty() }
-        )
-        addRule(rule)
-        return self
-    }
-
-    /**
-     Adds a validation rule to the Validator to check if the string is not equal to a specific value.
-
-     Use this method to add a validation rule that ensures the input string is not equal to the specified `string` value.
-
-     - Parameter string: The string value to compare against.
-     - Parameter errorMessage: The error message to display if the validation fails.
-     - Returns: The Validator instance with the new validation rule added.
-
-     Example usage:
-     The above example creates a `Validator` instance for validating a `String` input. It adds a validation rule using the `notEqual(to:)` method, which checks if the input string is not equal to the provided `string` value. If the input matches the specified value, the validation fails, and the provided error message will be displayed.
-
-     - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
-     */
-    @discardableResult
-    public func notEqual(to value: Model, errorMessage: String) -> Validator<Model> {
-        let rule = ValidationRule<Model>(
-            errorMessage: {(String(describing: Model.self), errorMessage)},
-            isValid: { !$0.elementsEqual(value) }
         )
         addRule(rule)
         return self
@@ -131,7 +107,7 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func length(_ min: Int, _ max: Int, errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+        let errorMessage = errorMessage ?? ErrorMessage.lengthError(name: String(describing: Model.self), min: min, max: max).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.count >= min && $0.count < max }
@@ -179,7 +155,7 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func  maxLength(_ length: Int, errorMessage: String? = nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+        let errorMessage = errorMessage ?? ErrorMessage.maxLengthError(name: String(describing: Model.self), max: length).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0.count <= length }

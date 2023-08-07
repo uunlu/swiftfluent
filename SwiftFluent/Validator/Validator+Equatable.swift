@@ -20,8 +20,8 @@ extension Validator where Model: Equatable {
      - Note: The `@discardableResult` attribute allows the user to ignore the return value of this method if they choose to do so.
      */
     @discardableResult
-    public func notEqual(to value: Model, errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+    public func notEqual(_ value: Model, errorMessage: String?=nil) -> Validator<Model> {
+        let errorMessage = errorMessage ?? ErrorMessage.notEqualError(name: String(describing: Model.self), value: String(describing: value)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0 != value }
@@ -42,8 +42,8 @@ extension Validator where Model: Equatable {
      - Note: The `@discardableResult` attribute allows the user to ignore the return value of this method if they choose to do so.
     */
     @discardableResult
-    public func equal(to value: Model, errorMessage: String?=nil) -> Validator<Model> {
-        let errorMessage = errorMessage ?? defaultErrorMessage
+    public func equal(_ value: Model, errorMessage: String?=nil) -> Validator<Model> {
+        let errorMessage = errorMessage ?? ErrorMessage.equalError(name: String(describing: Model.self), value: String(describing: value)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
             isValid: { $0 == value }

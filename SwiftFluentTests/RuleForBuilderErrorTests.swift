@@ -49,8 +49,8 @@ final class RuleForBuilderErrorTests: XCTestCase {
 
         let expectedNameLengthErrorMessage = ErrorMessage.lengthError(name: "name", min: 0, max: 0).errorDescription
         let expectedNameMinLengthErrorMessage = ErrorMessage.minLengthError(name: "name", min: 100).errorDescription
-        let expectedNameEmailErrorMessage = ErrorMessage.email(name: "name").errorDescription
-        let expectedNameCreditcardErrorMessage = ErrorMessage.creditCard(name: "name").errorDescription
+        let expectedNameEmailErrorMessage = ErrorMessage.emailError(name: "name").errorDescription
+        let expectedNameCreditcardErrorMessage = ErrorMessage.creditCardError(name: "name").errorDescription
         let expectedNameMaxLengthErrorMessage = ErrorMessage.maxLengthError(name: "name", max: 0).errorDescription
         let expectedNameLessThanErrorMessage = ErrorMessage.lessThanError(name: "name", max: "0").errorDescription
         let expectedNameLessThanOrEqualToErrorMessage = ErrorMessage.lessThanOrEqualToError(name: "name", max: "0").errorDescription

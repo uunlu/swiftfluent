@@ -12,9 +12,9 @@ enum ErrorMessage: Error, LocalizedError {
     case minLengthError(name: String, min: Int)
     case maxLengthError(name: String, max: Int)
     // Extension String
-    case email(name: String)
-    case creditCard(name: String)
-    case number(name: String)
+    case emailError(name: String)
+    case creditCardError(name: String)
+    case numberError(name: String)
     // Extension Comparable
     case lessThanError(name: String, max: String)
     case lessThanOrEqualToError(name: String, max: String)
@@ -36,11 +36,11 @@ enum ErrorMessage: Error, LocalizedError {
                 return NSLocalizedString("The length of ‘\(name)’ must be \(min) characters or more.", comment: "")
             case .maxLengthError(let name, let max):
                 return NSLocalizedString("The length of ‘\(name)’ must be \(max) characters or fewer.", comment: "")
-            case .email(let name):
+            case .emailError(let name):
                 return NSLocalizedString("'\(name)' is not a valid email address.", comment: "")
-            case .creditCard(let name):
+            case .creditCardError(let name):
                 return NSLocalizedString("‘\(name)‘ is not a valid credit card number.", comment: "")
-            case .number(let name):
+            case .numberError(let name):
                 return NSLocalizedString("‘\(name)‘ is not a valid number.", comment: "")
             case .lessThanError(let name, let max):
                 return NSLocalizedString("‘\(name)’ must be less than \(max).", comment: "")

@@ -145,7 +145,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<String>()
 
-        sut.notEqual(to: "some string", errorMessage: notEqualError)
+        sut.notEqual("some string", errorMessage: notEqualError)
 
         let result = sut.validate(notEqualString)
         XCTAssertTrue(result.isValid)
@@ -158,7 +158,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<String>()
 
-        sut.notEqual(to: notEqualString, errorMessage: notEqualError)
+        sut.notEqual(notEqualString, errorMessage: notEqualError)
 
         let result = sut.validate(notEqualString)
         XCTAssertFalse(result.isValid)
@@ -171,7 +171,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<Int>()
 
-        sut.notEqual(to: 0, errorMessage: notEqualError)
+        sut.notEqual(0, errorMessage: notEqualError)
 
         let result = sut.validate(notEqualInt)
         XCTAssertTrue(result.isValid)
@@ -184,7 +184,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<Int>()
 
-        sut.notEqual(to: 10, errorMessage: notEqualError)
+        sut.notEqual(10, errorMessage: notEqualError)
 
         let result = sut.validate(notEqualInt)
         XCTAssertFalse(result.isValid)
@@ -249,7 +249,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<Int>()
 
-        sut.equal(to: 0, errorMessage: notEqualError)
+        sut.equal(0, errorMessage: notEqualError)
 
         let result = sut.validate(equalInt)
         XCTAssertFalse(result.isValid)
@@ -262,7 +262,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<Int>()
 
-        sut.equal(to: 10, errorMessage: notEqualError)
+        sut.equal(10, errorMessage: notEqualError)
 
         let result = sut.validate(equalInt)
         XCTAssertTrue(result.isValid)
@@ -275,7 +275,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<String>()
 
-        sut.equal(to: "equal string", errorMessage: notEqualError)
+        sut.equal("equal string", errorMessage: notEqualError)
 
         let result = sut.validate(equalString)
         XCTAssertTrue(result.isValid)
@@ -288,7 +288,7 @@ final class SwiftFluentTests: XCTestCase {
 
         let sut = Validator<Bool?>()
 
-        sut.equal(to: nil, errorMessage: notEqualError)
+        sut.equal(nil, errorMessage: notEqualError)
 
         let result = sut.validate(equalOptional)
         XCTAssertTrue(result.isValid)

@@ -261,7 +261,7 @@ public extension RuleForBuilder where Value == String {
     }
 
     fileprivate func buildEmail(_ customRegex: String?, errorMessage: String?) {
-        let error = errorMessage ?? ErrorMessage.email(name: keyPath.propertyName).errorDescription
+        let error = errorMessage ?? ErrorMessage.emailError(name: keyPath.propertyName).errorDescription
         let defaultMessage = (keyPath.propertyName, error)
 
         let rule = ValidationRule<Model>(errorMessage:{defaultMessage}) { model in
@@ -317,7 +317,7 @@ public extension RuleForBuilder where Value == String {
     }
 
     private func buildCreditCard(_ errorMessage: String?) {
-        let errorMessage = errorMessage ?? ErrorMessage.creditCard(name: keyPath.propertyName).errorDescription
+        let errorMessage = errorMessage ?? ErrorMessage.creditCardError(name: keyPath.propertyName).errorDescription
         let error = (keyPath.propertyName, errorMessage)
 
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
@@ -381,7 +381,7 @@ public extension RuleForBuilder where Value == String {
     }
 
     fileprivate func buildNumber(errorMessage: String?) {
-        let errorMessage = errorMessage ?? ErrorMessage.number(name: keyPath.propertyName).errorDescription
+        let errorMessage = errorMessage ?? ErrorMessage.numberError(name: keyPath.propertyName).errorDescription
         let error = (keyPath.propertyName, errorMessage)
 
         let rule = ValidationRule<Model>(errorMessage: {error}) { model in
