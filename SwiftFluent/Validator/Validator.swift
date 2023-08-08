@@ -50,9 +50,9 @@ public class Validator<Model> {
     /// Retrieves the validation error messages for a given property in the model.
     ///
     /// - Parameter keyPath: The key path representing the property in the model.
-    /// - Returns: An array of validation error messages for the specified property, or nil if there are no validation errors for the property.
-    public func errorFor<Value>(keyPath: KeyPath<Model, Value>) -> [String]? {
-        let errors = validationErrorsMap[keyPath.propertyName]
+    /// - Returns: An array of validation error messages for the specified property, or empty array if there are no validation errors for the property.
+    public func errorFor<Value>(keyPath: KeyPath<Model, Value>) -> [String] {
+        let errors = validationErrorsMap[keyPath.propertyName] ?? []
 
         return errors
     }
