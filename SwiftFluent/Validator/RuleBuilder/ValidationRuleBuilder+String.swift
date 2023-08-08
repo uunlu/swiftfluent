@@ -10,6 +10,43 @@ import Foundation
 // MARK: - length
 
 public extension ValidationRuleBuilder where Value == String {
+    /**
+     Adds a validation rule to check if the value of the property falls within the specified closed range.
+
+     - Parameter range: The closed range within which the property value should lie.
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `ValidationRuleBuilder` instance to allow method chaining for further rule definitions.
+
+     Example usage:
+     let validator = Validator<User>()
+     .ruleFor(.age)
+     .range(18...65, errorMessage: "Age must be between 18 and 65.")
+     .ruleFor(.experience)
+     .range(0...20) // Uses the default error message.
+     */
+    func range(_ range: ClosedRange<Int>, errorMessage: String?=nil) -> ValidationRuleBuilder<Model, Value> {
+        buildLength(range.lowerBound, max: range.upperBound, errorMessage: errorMessage)
+        return self
+    }
+
+    /**
+     Adds a validation rule to check if the value of the property falls within the specified closed range.
+
+     - Parameter range: The closed range within which the property value should lie.
+     - Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+     - Returns: The `Validator` instance to allow further rule definitions for different properties.
+
+     Example usage:
+     let validator = Validator<User>()
+     .ruleFor(.age)
+     .range(18...65, errorMessage: "Age must be between 18 and 65.")
+     .ruleFor(.experience)
+     .range(0...20) // Uses the default error message.
+     */
+    func range(_ range: ClosedRange<Int>, errorMessage: String?=nil) -> Validator<Model> {
+        buildLength(range.lowerBound, max: range.upperBound, errorMessage: errorMessage)
+        return validator
+    }
 
     /**
      Adds a validation rule to check if the length of the property value falls within the specified range.
