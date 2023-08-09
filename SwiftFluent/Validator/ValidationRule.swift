@@ -15,9 +15,4 @@ struct ValidationRule<Model> {
         self.errorMessage = errorMessage
         self.isValid = isValid
     }
-
-    init(isValid: @escaping (Model) -> Bool) {
-        self.errorMessage = { ("", "") }
-        self.isValid = isValid
-    }
 }
