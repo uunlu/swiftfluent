@@ -428,3 +428,99 @@ public extension ValidationRuleBuilder where Value == String {
         validator.addRule(rule)
     }
 }
+
+// MARK: - url
+
+public extension ValidationRuleBuilder where Value: OptionalType, Value.Wrapped == String {
+    /**
+     Creates a validation rule builder for validating URLs.
+
+     - Parameters:
+     - errorMessage: An optional error message to be associated with this validation rule.
+
+     - Returns: A `ValidationRuleBuilder` instance configured for building URL validation rules.
+     */
+    func url(
+        errorMessage: String? = nil
+    ) -> ValidationRuleBuilder<Model, Value> {
+        buildURL(errorMessage: errorMessage)
+        return self
+    }
+
+    /**
+     Creates a validator for URL validation, allowing validation of a specific property as a URL.
+
+     - Parameters:
+     - errorMessage: An optional error message to be associated with this validation.
+
+     - Returns: A `Validator` instance configured for validating URL properties.
+     */
+    func url(
+        errorMessage: String? = nil
+    ) -> Validator<Model> {
+        buildURL(errorMessage: errorMessage)
+        return validator
+    }
+
+
+    private func buildURL(errorMessage: String?) {
+        let errorMessage = errorMessage ?? ErrorMessage.urlError(name: keyPath.propertyName).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
+        let rule = ValidationRule<Model>(errorMessage:{error}) { model in
+            let value = model[keyPath: keyPath]
+            guard let urlString = value as? String else { return false }
+            if URL(string: urlString)==nil {
+                return false
+            }
+            return true
+        }
+
+        validator.addRule(rule)
+    }
+}
+
+public extension ValidationRuleBuilder where Value == String {
+    /**
+     Creates a validation rule builder for validating URLs.
+
+     - Parameters:
+     - errorMessage: An optional error message to be associated with this validation rule.
+
+     - Returns: A `ValidationRuleBuilder` instance configured for building URL validation rules.
+     */
+    func url(
+        errorMessage: String? = nil
+    ) -> ValidationRuleBuilder<Model, Value> {
+        buildURL(errorMessage: errorMessage)
+        return self
+    }
+
+    /**
+     Creates a validator for URL validation, allowing validation of a specific property as a URL.
+
+     - Parameters:
+     - errorMessage: An optional error message to be associated with this validation.
+
+     - Returns: A `Validator` instance configured for validating URL properties.
+     */
+    func url(
+        errorMessage: String? = nil
+    ) -> Validator<Model> {
+        buildURL(errorMessage: errorMessage)
+        return validator
+    }
+
+    private func buildURL(errorMessage: String?) {
+        let errorMessage = errorMessage ?? ErrorMessage.urlError(name: keyPath.propertyName).errorDescription
+        let error = (keyPath.propertyName, errorMessage)
+        let rule = ValidationRule<Model>(errorMessage:{error}) { model in
+            let value = model[keyPath: keyPath]
+            if URL(string: value)==nil {
+                return false
+            }
+            return true
+        }
+
+        validator.addRule(rule)
+    }
+}

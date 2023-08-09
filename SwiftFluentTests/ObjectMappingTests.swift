@@ -592,6 +592,23 @@ final class ObjectMappingTests: XCTestCase {
         XCTAssertTrue(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
+
+    func testObjectURL_onIsValidFalse() throws {
+        let user = makeSUT(creditCardNumber: "12121a")
+
+        let validator = Validator<User>()
+            .ruleFor(\.profileImageURL)
+            .url()
+            .ruleFor(\.name)
+            .url()
+            .build()
+
+        let result = validator.validate(user)
+
+        XCTAssertFalse(result.isValid)
+        XCTAssertEqual(validator.validationErrors.count, 2)
+        XCTAssertEqual(validator.validationErrors.first, "‘profileImageURL‘ is not a valid URL.")
+    }
 }
 
 
