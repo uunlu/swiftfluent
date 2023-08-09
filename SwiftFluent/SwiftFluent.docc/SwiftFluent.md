@@ -1,6 +1,16 @@
 # SwiftFluent Documentation
 
-**Quickstart Guide: SwiftFluent Framework**
+## Table of Contents
+
+- [Quickstart Guide](#quickstart-guide)
+- [Introduction](#introduction)
+- [Initializer](#initializer)
+- [Adding Validation Rules](#adding-validation-rules)
+- [Performing Validation](#performing-validation)
+- [Validation Errors](#validation-errors)
+- [Additional Validation Information](#additional-validation-information)
+
+### **Quickstart Guide**
 
 SwiftFluent is a powerful validation framework for Swift applications. With intuitive APIs, it empowers developers to easily define and enforce data validation rules. Whether it's ensuring data integrity, validating user inputs, or handling complex validation logic, SwiftFluent simplifies the process while maintaining flexibility.
 
@@ -21,10 +31,9 @@ struct User {
 // Create a Validator instance
 let validator = Validator<User>()
     .ruleFor(\.name)
-    .required()
+    .notEmpty()
     .maxLength(50)
     .ruleFor(\.age)
-    .required()
     .range(18...100)
     .ruleFor(\.profileImageURL)
     .notNil()
@@ -34,15 +43,6 @@ let validator = Validator<User>()
 ```
 
 Get started with SwiftFluent to streamline your data validation process with ease and precision.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Initializer](#initializer)
-- [Adding Validation Rules](#adding-validation-rules)
-- [Performing Validation](#performing-validation)
-- [Validation Errors](#validation-errors)
-- [Additional Validation Information](#additional-validation-information)
 
 ## Introduction
 
@@ -59,14 +59,27 @@ let validator = Validator<Model>()
 
 ## Adding Validation Rules
 
-Before performing validation, you need to define the validation rules for your `Model`. Validation rules are encapsulated within `ValidationRule` instances. To add a validation rule to the `Validator`, use the `addRule(_:)` method:
+Validation can be seamlessly integrated either by chaining default validators or by attaching custom validators using the `validate` method:
+
+### Chaining Default Validators
 
 ```swift
 let validator = Validator<User>()
-validator.addRule(usernameValidationRule)
-validator.addRule(emailValidationRule)
-// Add more validation rules as needed
+    .ruleFor(\.username).notEmpty()
+    .ruleFor(\.email).email()
+    // Add more default validation rules as needed
 ```
+
+### Adding Custom Validators
+
+```swift
+let customValidator = ValidationRule<User>(...) // Define your custom validation rule
+let validator = Validator<User>()
+    .validate(customValidator)
+    // Add more custom validation rules as needed
+```
+
+Opt for the approach that suits your validation requirements.
 
 ## Performing Validation
 
@@ -209,6 +222,7 @@ The `@discardableResult` attribute is employed to suppress the compiler warning 
 
 By leveraging the `ruleFor` method and `ValidationRuleBuilder`, you can easily retrieve validation error messages for specific properties and create comprehensive validation rules for your Swift objects. This ensures data integrity and validity in your applications, enhancing the reliability and accuracy of your data.
 
+---
 
 ### `equal(_:errorMessage:)`
 
@@ -237,6 +251,8 @@ let validator = Validator<User>()
 
 If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ must be equal to \(value).". The actual property name and `value` will be dynamically inserted into the error message.
 
+---
+
 ### `notEqual(_:errorMessage:)`
 
 Adds a validation rule to check if the value of the property is not equal to the specified `value`.
@@ -264,6 +280,7 @@ let validator = Validator<User>()
 
 If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ should not be equal to \(value).". The actual property name and `value` will be dynamically inserted into the error message.
 
+---
 
 #### `errorFor<Value>(keyPath: KeyPath<Model, Value>, assign: inout String) -> Validator<Model>`
 
@@ -286,7 +303,7 @@ print(errorMessage) // Output: "Invalid email format."
 
 With the **`errorFor`** method, you can easily retrieve validation error messages for specific properties in your model and handle them accordingly. The ability to update the **`errorMessage`** parameter in-place allows for efficient and convenient error handling during validation
 
-
+---
 
 #### `email(customRegex: String?=nil, errorMessage: String?=nil) -> Validator<Model>`
 Adds an email validation rule to the Validator. Use this method to add an email validation rule to the Validator. The `email` function checks if the input `Model` contains a valid email address by invoking the `isValidEmail()` function on it.
@@ -297,6 +314,8 @@ let validator = Validator<String>()
 validator.email(errorMessage: "Invalid email format.")
 ```
 
+---
+
 #### `creditCard(errorMessage: String?=nil) -> Validator<Model>`
 Adds a credit card validation rule to the Validator. Use this method to add a credit card validation rule to the Validator. The `creditCard` function checks if the credit card number, represented by the input `Model`, is valid according to the Luhn algorithm using the `CreditCardValidator.isValid(_:)` function.
 
@@ -306,6 +325,8 @@ let validator = Validator<String>()
 validator.creditCard(errorMessage: "Invalid credit card number.")
 ```
 
+---
+
 #### `number(errorMessage: String?=nil) -> Validator<Model>`
 Adds a number validation rule to the Validator. Use this method to add a number validation rule to the Validator. The `number` function checks if the input `Model` is a valid number using the `isNumber()` function on it.
 
@@ -314,6 +335,27 @@ Example Usage:
 let validator = Validator<String>()
 validator.number(errorMessage: "Invalid number.")
 ```
+
+---
+
+#### `range(_ range: ClosedRange<Int>, errorMessage: String? = nil) -> ValidationRuleBuilder<Model, Value>`
+
+Adds a validation rule to check if the value of the property falls within the specified closed range.
+
+- Parameter range: The closed range within which the property value should lie.
+- Parameter errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
+- Returns: The `ValidationRuleBuilder` instance to allow method chaining for further rule definitions.
+
+Example usage:
+```swift
+let validator = Validator<User>()
+    .ruleFor(\.age)
+    .range(18...65, errorMessage: "Age must be between 18 and 65.")
+    .ruleFor(\.experience)
+    .range(0...20) // Uses the default error message.
+```
+
+---
 
 #### `length(_ min: Int, _ max: Int, errorMessage: String?=nil) -> Validator<Model>`
 Extends the Validator type with a method to perform length-based validation on the given model type. This method checks the length of the model's value against the specified `min` and `max` values (inclusive on the minimum end and exclusive on the maximum end). The validation will pass if the length of the model's value is greater than or equal to `min` and less than `max`.
@@ -333,6 +375,8 @@ let validator = Validator<String>()
 validator.minLength(8, errorMessage: "Minimum length should be 8 characters.")
 ```
 
+---
+
 #### `maxLength(_ length: Int, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform maximum length validation on the given model type. This method checks the length of the model's value against the specified `length` value. The validation will pass if the length of the model's value is less than or equal to `length`.
 
@@ -342,6 +386,7 @@ let validator = Validator<String>()
 validator.maxLength(15, errorMessage: "Maximum length should be 15 characters.")
 ```
 
+---
 
 #### `lessThan(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
 Extends the Validator type with a method to perform less-than validation on the given model type. This method checks if the model's value is less than the provided `value`. The validation will pass if the model's value is indeed less than `value`.
@@ -352,6 +397,8 @@ let validator = Validator<Int>()
 validator.lessThan(10, errorMessage: "Value should be less than 10.")
 ```
 
+---
+
 #### `lessThanOrEqualTo(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
 Extends the Validator type with a method to perform less-than-or-equal-to validation on the given model type. This method checks if the model's value is less than or equal to the provided `value`. The validation will pass if the model's value is less than or equal to `value`.
 
@@ -361,6 +408,8 @@ let validator = Validator<Int>()
 validator.lessThanOrEqualTo(20, errorMessage: "Value should be less than or equal to 20.")
 ```
 
+---
+
 #### `greaterThan(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
 Extends the Validator type with a method to perform greater-than validation on the given model type. This method checks if the model's value is greater than the provided `value`. The validation will pass if the model's value is indeed greater than `value`.
 
@@ -369,6 +418,8 @@ Example Usage:
 let validator = Validator<Int>()
 validator.greaterThan(5, errorMessage: "Value should be greater than 5.")
 ```
+
+---
 
 #### `greaterThanOrEqualTo(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
 Extends the Validator type with a method to perform greater-than-or-equal-to validation on the given model type. This method checks if the model's value is greater than or equal to the provided `value`. The validation will pass if the model's value is greater than or equal to `value`.
@@ -397,7 +448,7 @@ The method returns a `ValidationResult` enum with two possible cases:
 - `.valid`: Indicates that the validation succeeded, and the model is valid.
 - `.invalid(errors: [String])`: Indicates that the validation failed, and the provided array contains error messages representing the validation errors.
 
-### `errorFor<Value>(keyPath: KeyPath<Model, Value>) -> [String]?`
+### `errorFor<Value>(keyPath: KeyPath<Model, Value>) -> [String]`
 
 Retrieves the validation error messages for a given property in the model.
 
