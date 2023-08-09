@@ -1098,3 +1098,26 @@ let validator = Validator<User>()
     .ruleFor(\.salary)
     .number() // Uses the default error message.
 ```
+
+---
+
+### `url(errorMessage:)`
+
+Creates a validation rule builder for validating URLs.
+
+- Parameters:
+    - `errorMessage`: An optional error message to be associated with this validation rule.
+
+**Returns:**
+
+A `ValidationRuleBuilder` instance configured for building URL validation rules.
+
+**Example:**
+
+```swift
+let validator = Validator<User>()
+    .ruleFor(\.profileImageURL)
+    .url(errorMessage: "Invalid URL format")
+```
+
+---
