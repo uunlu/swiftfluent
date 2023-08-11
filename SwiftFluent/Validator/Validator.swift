@@ -57,6 +57,16 @@ public class Validator<Model> {
         return errors
     }
 
+    /// Retrieves the first validation error message for a given property in the model.
+    ///
+    /// - Parameter keyPath: The key path representing the property in the model.
+    /// - Returns: The first validation error message for the specified property, or an empty string if there are no validation errors for the property.
+    public func errorFor<Value>(keyPath: KeyPath<Model, Value>) -> String {
+        let error = validationErrorsMap[keyPath.propertyName]?.first ?? ""
+
+        return error
+    }
+
     /// Retrieves the validation error messages for a given property in the model and updates the provided `errorMessage` with the first error message, if any.
     /// This method is used to get the error message associated with a specific property and update an `inout` `errorMessage` parameter for easy access to the error message.
     ///
