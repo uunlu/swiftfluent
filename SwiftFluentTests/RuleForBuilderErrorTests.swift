@@ -42,10 +42,10 @@ final class RuleForBuilderErrorTests: XCTestCase {
 
         validator.validate(model)
 
-        let errorsForName = result.errorFor(keyPath: \.name)
-        let errorsForAge = result.errorFor(keyPath: \.age)
-        let errorsForEmail = result.errorFor(keyPath: \.email)
-        let errorsForProfileImageURL = result.errorFor(keyPath: \.profileImageURL)
+        let errorsForName: [String] = result.errorFor(keyPath: \.name)
+        let errorsForAge: [String] = result.errorFor(keyPath: \.age)
+        let errorsForEmail: [String] = result.errorFor(keyPath: \.email)
+        let errorsForProfileImageURL: [String] = result.errorFor(keyPath: \.profileImageURL)
 
         let expectedNameLengthErrorMessage = ErrorMessage.lengthError(name: "name", min: 0, max: 0).errorDescription
         let expectedNameMinLengthErrorMessage = ErrorMessage.minLengthError(name: "name", min: 100).errorDescription
