@@ -107,6 +107,7 @@ extension Validator where Model == String{
      */
     @discardableResult
     public func length(_ min: Int, _ max: Int, errorMessage: String?=nil) -> Validator<Model> {
+        assert(min < max, "min must be less than max")
         let errorMessage = errorMessage ?? ErrorMessage.lengthError(name: String(describing: Model.self), min: min, max: max).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},
