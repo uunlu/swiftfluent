@@ -27,7 +27,7 @@ public struct ValidationRuleBuilder<Model, Value> {
     ///   - errorMessage: The error message to display if the validation fails. If not provided, a default error message will be used.
     ///   - condition: The condition that must be satisfied for the validation to pass.
     /// - Returns: The ValidationRuleBuilder instance with the validation rule added.
-    public func validate(_ errorMessage: String?=nil, condition: @escaping (Value) -> Bool) -> ValidationRuleBuilder<Model, Value> {
+    public func validate(_ errorMessage: String? = nil, condition: @escaping (Value) -> Bool) -> ValidationRuleBuilder<Model, Value> {
         let errorMessage = errorMessage ?? ErrorMessage.defaultError.errorDescription
         let rule = ValidationRule<Model>(errorMessage: {(keyPath.propertyName, errorMessage)}) { model in
             let value = model[keyPath: keyPath]
@@ -37,4 +37,3 @@ public struct ValidationRuleBuilder<Model, Value> {
         return self
     }
 }
-

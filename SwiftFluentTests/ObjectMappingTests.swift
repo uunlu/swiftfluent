@@ -36,7 +36,6 @@ final class ObjectMappingTests: XCTestCase {
             .length(0, 3)
             .build()
 
-
         let result = validator.validate(user)
 
         XCTAssertEqual(result.isValid, false)
@@ -103,7 +102,6 @@ final class ObjectMappingTests: XCTestCase {
 
         let result = validator.validate(user)
 
-
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 2)
         XCTAssertEqual(validator.validationErrors.first, "‘age’ must be less than 10.")
@@ -121,7 +119,6 @@ final class ObjectMappingTests: XCTestCase {
 
         let result = validator.validate(user)
 
-
         XCTAssertTrue(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
@@ -137,7 +134,6 @@ final class ObjectMappingTests: XCTestCase {
             .build()
 
         let result = validator.validate(user)
-
 
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 2)
@@ -156,7 +152,6 @@ final class ObjectMappingTests: XCTestCase {
 
         let result = validator.validate(user)
 
-
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 2)
         XCTAssertEqual(validator.validationErrors.first, "‘age’ must be less than or equal to 19.")
@@ -174,7 +169,6 @@ final class ObjectMappingTests: XCTestCase {
 
         let result = validator.validate(user)
 
-
         XCTAssertTrue(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 0)
     }
@@ -190,7 +184,6 @@ final class ObjectMappingTests: XCTestCase {
             .build()
 
         let result = validator.validate(user)
-
 
         XCTAssertFalse(result.isValid)
         XCTAssertEqual(validator.validationErrors.count, 2)
@@ -486,7 +479,7 @@ final class ObjectMappingTests: XCTestCase {
                 "gmail.com",
                 "yahoo.com",
                 "outlook.com",
-                "hotmail.com",
+                "hotmail.com"
             ]
             guard let domain = email.split(separator: "@").last else {
                 return false
@@ -579,7 +572,7 @@ final class ObjectMappingTests: XCTestCase {
         numberFormatter.locale = Locale.current
         let decimalNumber: Decimal = 1213231/100
         let numberString = numberFormatter.string(for: decimalNumber) ?? ""
-        
+
         let user = makeSUT(creditCardNumber: numberString)
 
         let validator = Validator<User>()
@@ -610,5 +603,3 @@ final class ObjectMappingTests: XCTestCase {
         XCTAssertEqual(validator.validationErrors.first, "‘profileImageURL‘ is not a valid URL.")
     }
 }
-
-

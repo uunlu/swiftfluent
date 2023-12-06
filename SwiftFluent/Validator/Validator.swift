@@ -75,7 +75,7 @@ public class Validator<Model> {
     ///   - assign: A reference to a string that will be updated with the first validation error message, if any. If no errors are found, it will be set to an empty string.
     /// - Returns: The Validator instance for further chaining of validation rules.
     @discardableResult
-    public func errorFor<Value>(keyPath: KeyPath<Model, Value>, assign: inout String) -> Validator<Model>{
+    public func errorFor<Value>(keyPath: KeyPath<Model, Value>, assign: inout String) -> Validator<Model> {
         guard let errors = validationErrorsMap[keyPath.propertyName] else {
             assign = ""
             return self

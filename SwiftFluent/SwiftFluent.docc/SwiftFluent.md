@@ -297,7 +297,7 @@ With the **`errorFor`** method, you can easily retrieve validation error message
 
 
 
-#### `email(customRegex: String?=nil, errorMessage: String?=nil) -> Validator<Model>`
+#### `email(customRegex: String? = nil, errorMessage: String? = nil) -> Validator<Model>`
 Adds an email validation rule to the Validator. Use this method to add an email validation rule to the Validator. The `email` function checks if the input `Model` contains a valid email address by invoking the `isValidEmail()` function on it.
 
 Example Usage:
@@ -306,7 +306,7 @@ let validator = Validator<String>()
 validator.email(errorMessage: "Invalid email format.")
 ```
 
-#### `creditCard(errorMessage: String?=nil) -> Validator<Model>`
+#### `creditCard(errorMessage: String? = nil) -> Validator<Model>`
 Adds a credit card validation rule to the Validator. Use this method to add a credit card validation rule to the Validator. The `creditCard` function checks if the credit card number, represented by the input `Model`, is valid according to the Luhn algorithm using the `CreditCardValidator.isValid(_:)` function.
 
 Example Usage:
@@ -315,7 +315,7 @@ let validator = Validator<String>()
 validator.creditCard(errorMessage: "Invalid credit card number.")
 ```
 
-#### `number(errorMessage: String?=nil) -> Validator<Model>`
+#### `number(errorMessage: String? = nil) -> Validator<Model>`
 Adds a number validation rule to the Validator. Use this method to add a number validation rule to the Validator. The `number` function checks if the input `Model` is a valid number using the `isNumber()` function on it.
 
 Example Usage:
@@ -324,7 +324,7 @@ let validator = Validator<String>()
 validator.number(errorMessage: "Invalid number.")
 ```
 
-#### `length(_ min: Int, _ max: Int, errorMessage: String?=nil) -> Validator<Model>`
+#### `length(_ min: Int, _ max: Int, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform length-based validation on the given model type. This method checks the length of the model's value against the specified `min` and `max` values (inclusive on the minimum end and exclusive on the maximum end). The validation will pass if the length of the model's value is greater than or equal to `min` and less than `max`.
 
 Example Usage:
@@ -333,7 +333,7 @@ let validator = Validator<String>()
 validator.length(5, 10, errorMessage: "Length should be between 5 and 9 characters.")
 ```
 
-#### `minLength(_ length: Int, errorMessage: String?=nil) -> Validator<Model>`
+#### `minLength(_ length: Int, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform minimum length validation on the given model type. This method checks the length of the model's value against the specified `min` value. The validation will pass if the length of the model's value is greater than or equal to `min`.
 
 Example Usage:
@@ -352,7 +352,7 @@ validator.maxLength(15, errorMessage: "Maximum length should be 15 characters.")
 ```
 
 
-#### `lessThan(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
+#### `lessThan(_ value: Model, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform less-than validation on the given model type. This method checks if the model's value is less than the provided `value`. The validation will pass if the model's value is indeed less than `value`.
 
 Example Usage:
@@ -361,7 +361,7 @@ let validator = Validator<Int>()
 validator.lessThan(10, errorMessage: "Value should be less than 10.")
 ```
 
-#### `lessThanOrEqualTo(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
+#### `lessThanOrEqualTo(_ value: Model, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform less-than-or-equal-to validation on the given model type. This method checks if the model's value is less than or equal to the provided `value`. The validation will pass if the model's value is less than or equal to `value`.
 
 Example Usage:
@@ -370,7 +370,7 @@ let validator = Validator<Int>()
 validator.lessThanOrEqualTo(20, errorMessage: "Value should be less than or equal to 20.")
 ```
 
-#### `greaterThan(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
+#### `greaterThan(_ value: Model, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform greater-than validation on the given model type. This method checks if the model's value is greater than the provided `value`. The validation will pass if the model's value is indeed greater than `value`.
 
 Example Usage:
@@ -379,7 +379,7 @@ let validator = Validator<Int>()
 validator.greaterThan(5, errorMessage: "Value should be greater than 5.")
 ```
 
-#### `greaterThanOrEqualTo(_ value: Model, errorMessage: String?=nil) -> Validator<Model>`
+#### `greaterThanOrEqualTo(_ value: Model, errorMessage: String? = nil) -> Validator<Model>`
 Extends the Validator type with a method to perform greater-than-or-equal-to validation on the given model type. This method checks if the model's value is greater than or equal to the provided `value`. The validation will pass if the model's value is greater than or equal to `value`.
 
 Example Usage:

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 // MARK: - lessThan
 
 public extension ValidationRuleBuilder where Value: Comparable {

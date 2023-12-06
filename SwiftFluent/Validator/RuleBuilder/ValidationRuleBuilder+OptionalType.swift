@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - notNil
 
-public extension ValidationRuleBuilder where Value: OptionalType  {
+public extension ValidationRuleBuilder where Value: OptionalType {
 
     /**
      Adds a validation rule to check if the value of the property is not nil.
