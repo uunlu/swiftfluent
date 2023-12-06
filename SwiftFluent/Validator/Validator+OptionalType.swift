@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Validator where Model: OptionalType  {
+extension Validator where Model: OptionalType {
     /**
      Adds a validation rule to the Validator to check if the optional value is not nil.
 
@@ -27,7 +27,7 @@ extension Validator where Model: OptionalType  {
      - Note: The `@discardableResult` attribute allows ignoring the return value if desired. However, it is recommended to capture the returned Validator instance to ensure all validation rules are added.
      */
     @discardableResult
-    public func notNil(errorMessage: String?=nil) -> Validator<Model> {
+    public func notNil(errorMessage: String? = nil) -> Validator<Model> {
         let errorMessage = errorMessage ?? ErrorMessage.notNilError(name: String(describing: Model.self)).errorDescription
         let rule = ValidationRule<Model>(
             errorMessage: {(String(describing: Model.self), errorMessage)},

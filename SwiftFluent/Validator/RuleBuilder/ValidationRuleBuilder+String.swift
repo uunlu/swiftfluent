@@ -24,7 +24,7 @@ public extension ValidationRuleBuilder where Value == String {
      .ruleFor(.experience)
      .range(0...20) // Uses the default error message.
      */
-    func range(_ range: ClosedRange<Int>, errorMessage: String?=nil) -> ValidationRuleBuilder<Model, Value> {
+    func range(_ range: ClosedRange<Int>, errorMessage: String? = nil) -> ValidationRuleBuilder<Model, Value> {
         buildLength(range.lowerBound, max: range.upperBound, errorMessage: errorMessage)
         return self
     }
@@ -43,7 +43,7 @@ public extension ValidationRuleBuilder where Value == String {
      .ruleFor(.experience)
      .range(0...20) // Uses the default error message.
      */
-    func range(_ range: ClosedRange<Int>, errorMessage: String?=nil) -> Validator<Model> {
+    func range(_ range: ClosedRange<Int>, errorMessage: String? = nil) -> Validator<Model> {
         buildLength(range.lowerBound, max: range.upperBound, errorMessage: errorMessage)
         return validator
     }
@@ -270,7 +270,7 @@ public extension ValidationRuleBuilder where Value == String {
      ```
      - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ is not a valid email address.". The actual property name will be dynamically inserted into the error message.
      */
-    func email(_ customRegex: String?=nil, errorMessage: String? = nil) -> ValidationRuleBuilder<Model, Value> {
+    func email(_ customRegex: String? = nil, errorMessage: String? = nil) -> ValidationRuleBuilder<Model, Value> {
         buildEmail(customRegex, errorMessage: errorMessage)
         return self
     }
@@ -292,7 +292,7 @@ public extension ValidationRuleBuilder where Value == String {
      ```
      - Note: If the `errorMessage` is not provided, a default error message will be used in the format: "‘\(keyPath.propertyName)’ is not a valid email address.". The actual property name will be dynamically inserted into the error message.
      */
-    func email(customRegex: String?=nil, errorMessage: String? = nil) -> Validator<Model> {
+    func email(customRegex: String? = nil, errorMessage: String? = nil) -> Validator<Model> {
         buildEmail(customRegex, errorMessage: errorMessage)
         return validator
     }
@@ -301,7 +301,7 @@ public extension ValidationRuleBuilder where Value == String {
         let errorMessage = errorMessage ?? ErrorMessage.emailError(name: keyPath.propertyName).errorDescription
         let error = (keyPath.propertyName, errorMessage)
 
-        let rule = ValidationRule<Model>(errorMessage:{error}) { model in
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
             return value.isValidEmail(customRegex: customRegex)
         }
@@ -462,14 +462,13 @@ public extension ValidationRuleBuilder where Value: OptionalType, Value.Wrapped 
         return validator
     }
 
-
     private func buildURL(errorMessage: String?) {
         let errorMessage = errorMessage ?? ErrorMessage.urlError(name: keyPath.propertyName).errorDescription
         let error = (keyPath.propertyName, errorMessage)
-        let rule = ValidationRule<Model>(errorMessage:{error}) { model in
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
             guard let urlString = value as? String else { return false }
-            if URL(string: urlString)==nil {
+            if URL(string: urlString) == nil {
                 return false
             }
             return true
@@ -513,9 +512,9 @@ public extension ValidationRuleBuilder where Value == String {
     private func buildURL(errorMessage: String?) {
         let errorMessage = errorMessage ?? ErrorMessage.urlError(name: keyPath.propertyName).errorDescription
         let error = (keyPath.propertyName, errorMessage)
-        let rule = ValidationRule<Model>(errorMessage:{error}) { model in
+        let rule = ValidationRule<Model>(errorMessage: {error}) { model in
             let value = model[keyPath: keyPath]
-            if URL(string: value)==nil {
+            if URL(string: value) == nil {
                 return false
             }
             return true

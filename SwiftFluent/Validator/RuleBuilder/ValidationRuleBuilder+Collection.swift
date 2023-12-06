@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - notEmpty
 
-public extension ValidationRuleBuilder where Value: Collection  {
+public extension ValidationRuleBuilder where Value: Collection {
 
     /**
      Adds a validation rule to check if the value of the property is not empty.

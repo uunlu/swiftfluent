@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - equal
 
-public extension ValidationRuleBuilder where Value: Equatable  {
+public extension ValidationRuleBuilder where Value: Equatable {
     /**
      Adds a validation rule to check if the value of the property is equal to the specified `value`.
 
@@ -67,7 +67,7 @@ public extension ValidationRuleBuilder where Value: Equatable  {
 
 // MARK: - notEqual
 
-public extension ValidationRuleBuilder where Value: Equatable  {
+public extension ValidationRuleBuilder where Value: Equatable {
 
     /**
      Adds a validation rule to check if the value of the property is not equal to the specified `value`.
